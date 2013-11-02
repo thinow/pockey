@@ -15,14 +15,22 @@
 		<a href="#/next-month">Mois suivant</a>
 		<a href="#/add-entry">+</a>
 	</div>
-	<table>
-		<tbody>
-			<tr>
-				<td>{{ '2013-10-15' | date:'EEE dd' }}</td>
-				<td>{{ -75.12 | number:0 }} €</td>
-				<td>soirée</td>
-			</tr>
-		</tbody>
-	</table>
+	<div>
+		<a href="#/edit/0">
+			<span>{{ '2013-10-15' | date:'EEE dd' }}</span>
+			<span>{{ -75.12 | number:0 }} €</span>
+			<span>Soirée</span>
+		</a>
+		<a href="#/edit/0">
+			<span>{{ '2013-10-12' | date:'EEE dd' }}</span>
+			<span>{{ -22 | number:0 }} €</span>
+			<span>Loisirs</span>
+		</a>
+		<a href="#/edit/0">
+			<span>{{ '2013-10-04' | date:'EEE dd' }}</span>
+			<span>{{ -12 | number:0 }} €</span>
+			<span>Repas</span>
+		</a>
+	</div>
 </body>
 </html>
