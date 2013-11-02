@@ -4,33 +4,44 @@
 	<title>Pockey</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="pockey.css">
+
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
 	<script src="http://code.angularjs.org/1.0.8/i18n/angular-locale_fr-fr.js"></script>
 </head>
 <body>
-	<h1>Pockey</h1>
-	<div>
-		<span>{{ '2013-10-15' | date:'MMMM' }}</span>
-		<span>+{{ 312.59 | number:0 }} €</span>
-		<a href="#/next-month">Mois suivant</a>
-		<a href="#/add-entry">+</a>
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<span class="navbar-brand">Pockey</span>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="navbar-right"><a href="#">{{ '2013-10-15' | date:'MMMM' }}</a></li>
+			</ul>
+		</div>
 	</div>
-	<div>
-		<a href="#/edit/0">
-			<span>{{ '2013-10-15' | date:'EEE dd' }}</span>
-			<span>{{ -75.12 | number:0 }} €</span>
-			<span>Soirée</span>
-		</a>
-		<a href="#/edit/0">
-			<span>{{ '2013-10-12' | date:'EEE dd' }}</span>
-			<span>{{ -22 | number:0 }} €</span>
-			<span>Loisirs</span>
-		</a>
-		<a href="#/edit/0">
-			<span>{{ '2013-10-04' | date:'EEE dd' }}</span>
-			<span>{{ -12 | number:0 }} €</span>
-			<span>Repas</span>
-		</a>
+	<div class="container">
+		<div>
+			<span>+{{ 312.59 | number:0 }} €</span>
+			<a href="#/next-month">Mois suivant</a>
+			<a href="#/add-entry">+</a>
+		</div>
+		<div>
+			<a href="#/edit/0">
+				<span>{{ '2013-10-15' | date:'EEE dd' }}</span>
+				<span>{{ -75.12 | number:0 }} €</span>
+				<span>Soirée</span>
+			</a>
+			<a href="#/edit/0">
+				<span>{{ '2013-10-12' | date:'EEE dd' }}</span>
+				<span>{{ -22 | number:0 }} €</span>
+				<span>Loisirs</span>
+			</a>
+			<a href="#/edit/0">
+				<span>{{ '2013-10-04' | date:'EEE dd' }}</span>
+				<span>{{ -12 | number:0 }} €</span>
+				<span>Repas</span>
+			</a>
+		</div>
 	</div>
 </body>
 </html>
