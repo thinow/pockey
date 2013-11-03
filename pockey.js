@@ -1,5 +1,7 @@
 function ListController($scope, $window) {
 
+	var budget = 500;
+
 	$scope.categories = [
 	    { text : 'Repas',	icon : 'cutlery',	color : 'danger' },
 	    { text : 'Loisirs',	icon : 'film',		color : 'primary' },
@@ -28,5 +30,14 @@ function ListController($scope, $window) {
 
 	max = function(array) {
 		return $window.Math.max.apply(null, array);
-	}
+	};
+
+	$scope.computeTotal = function() {
+		var allExpensesCost = 0;
+		angular.forEach($scope.expenses, function(expense) {
+			allExpensesCost += expense.cost;
+		});
+
+		return budget - allExpensesCost;
+	};
 }
