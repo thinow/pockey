@@ -1,4 +1,4 @@
-function ListController($scope) {
+function ListController($scope, $window) {
 
 	$scope.categories = [
 	    { text : 'Repas',	icon : 'cutlery',	color : 'danger' },
@@ -17,4 +17,16 @@ function ListController($scope) {
 	    { date : '2013-10-07',	cost : 15,	category : $scope.categories[2] }
 	];
 
+	$scope.findLastDate = function() {
+		var dates = new Array();
+		angular.forEach($scope.expenses, function(expense) {
+			dates.push(new Date(expense.date).getTime());
+		});
+
+		return max(dates);
+	};
+
+	max = function(array) {
+		return $window.Math.max.apply(null, array);
+	}
 }
