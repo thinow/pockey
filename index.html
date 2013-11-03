@@ -9,8 +9,9 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
 	<script src="http://code.angularjs.org/1.0.8/i18n/angular-locale_fr-fr.js"></script>
+	<script src="pockey.js"></script>
 </head>
-<body>
+<body ng-controller="ListController">
 	<div class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<span class="navbar-brand">Pockey</span>
@@ -33,48 +34,12 @@
 		</div>
 		<table class="detail table table-condensed table-striped">
 			<tbody>
-				<tr>
-					<td class="capitalized">{{ '2013-10-15' | date:'EEE dd' }}</td>
-					<td>{{ -35 | number }} &euro;</td>
+				<tr ng-repeat="expense in expenses">
+					<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
+					<td>{{ -expense.cost | number }} &euro;</td>
 					<td>
-						<span class="btn btn-danger">
-							<span class="glyphicon glyphicon-cutlery"></span>
-						</span>
-					</td>
-				</tr>
-				<tr>
-					<td class="capitalized">{{ '2013-10-14' | date:'EEE dd' }}</td>
-					<td>{{ -35 | number }} &euro;</td>
-					<td>
-						<span class="btn btn-primary">
-							<span class="glyphicon glyphicon-film"></span>
-						</span>
-					</td>
-				</tr>
-				<tr>
-					<td class="capitalized">{{ '2013-10-12' | date:'EEE dd' }}</td>
-					<td>{{ -22 | number }} &euro;</td>
-					<td>
-						<span class="btn btn-warning">
-							<span class="glyphicon glyphicon-glass"></span>
-						</span>
-					</td>
-				</tr>
-				<tr>
-					<td class="capitalized">{{ '2013-10-04' | date:'EEE dd' }}</td>
-					<td>{{ -20 | number }} &euro;</td>
-					<td>
-						<span class="btn btn-success">
-							<span class="glyphicon glyphicon-user"></span>
-						</span>
-					</td>
-				</tr>
-				<tr>
-					<td class="capitalized">{{ '2013-10-04' | date:'EEE dd' }}</td>
-					<td>{{ -12 | number }} &euro;</td>
-					<td>
-						<span class="btn btn-info">
-							<span class="glyphicon glyphicon-euro"></span>
+						<span title="{{expense.category.text}}" class="btn btn-{{expense.category.color}}">
+							<span class="glyphicon glyphicon-{{expense.category.icon}}"></span>
 						</span>
 					</td>
 				</tr>
