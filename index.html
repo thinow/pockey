@@ -31,23 +31,55 @@
 				</a>
 			</div>
 		</div>
-		<div class="detail">
-			<a href="#/edit/0">
-				<span class="capitalized">{{ '2013-10-15' | date:'EEE dd' }}</span>
-				<span>{{ -75 | number }} &euro;</span>
-				<span>Soirée</span>
-			</a>
-			<a href="#/edit/0">
-				<span class="capitalized">{{ '2013-10-12' | date:'EEE dd' }}</span>
-				<span>{{ -22 | number }} &euro;</span>
-				<span>Loisirs</span>
-			</a>
-			<a href="#/edit/0">
-				<span class="capitalized">{{ '2013-10-04' | date:'EEE dd' }}</span>
-				<span>{{ -12 | number }} &euro;</span>
-				<span>Repas</span>
-			</a>
-		</div>
+		<table class="detail">
+			<tbody>
+				<tr>
+					<td class="capitalized">{{ '2013-10-15' | date:'EEE dd' }}</td>
+					<td>{{ -35 | number }} &euro;</td>
+					<td>
+						<span class="btn btn-danger">
+							<span class="glyphicon glyphicon-cutlery"></span>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="capitalized">{{ '2013-10-14' | date:'EEE dd' }}</td>
+					<td>{{ -35 | number }} &euro;</td>
+					<td>
+						<span class="btn btn-primary">
+							<span class="glyphicon glyphicon-film"></span>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="capitalized">{{ '2013-10-12' | date:'EEE dd' }}</td>
+					<td>{{ -22 | number }} &euro;</td>
+					<td>
+						<span class="btn btn-warning">
+							<span class="glyphicon glyphicon-glass"></span>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="capitalized">{{ '2013-10-04' | date:'EEE dd' }}</td>
+					<td>{{ -20 | number }} &euro;</td>
+					<td>
+						<span class="btn btn-success">
+							<span class="glyphicon glyphicon-user"></span>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="capitalized">{{ '2013-10-04' | date:'EEE dd' }}</td>
+					<td>{{ -12 | number }} &euro;</td>
+					<td>
+						<span class="btn btn-info">
+							<span class="glyphicon glyphicon-euro"></span>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>

@@ -6,6 +6,8 @@
 .buttons .btn			{ width: 100%; margin-bottom: 2px; }
 .buttons .btn-default	{ color: #888; }
 
-.detail {}
+.detail					{ width: 100%; }
+.detail .btn:HOVER		{ cursor: default; }
+.detail td:nth-child(2)	{ font-weight: bold; }
 
 .capitalized { text-transform: capitalize; }
