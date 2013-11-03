@@ -1,7 +1,11 @@
-BODY>.container {
-	margin-top: 70px
-}
+.page-content { margin-top: 70px }
 
-.capitalized {
-	text-transform: capitalize;
-}
+.total { color: #090; font-size: 3.5em; font-weight: bold; margin-left: 40%; }
+
+.buttons				{ width: 18%; }
+.buttons .btn			{ width: 100%; margin-bottom: 2px; }
+.buttons .btn-default	{ color: #888; }
+
+.detail {}
+
+.capitalized { text-transform: capitalize; }
