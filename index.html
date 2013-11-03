@@ -22,7 +22,7 @@
 	</div>
 	<div class="page-content container">
 		<div class="summary">
-			<span class="total">{{ computeTotal() | number }} &euro;</span>
+			<span class="total">{{ computeTotal() | signedCurrency }}</span>
 			<div class="buttons pull-right">
 				<a href="#/next-month" class="btn btn-block btn-default">
 					<span class="glyphicon glyphicon-forward"></span> Mois suivant
@@ -36,7 +36,7 @@
 			<tbody>
 				<tr ng-repeat="expense in expenses">
 					<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
-					<td>{{ -expense.cost | number }} &euro;</td>
+					<td>{{ -expense.cost | signedCurrency }}</td>
 					<td>
 						<span title="{{expense.category.text}}" class="btn btn-{{expense.category.color}}">
 							<span class="glyphicon glyphicon-{{expense.category.icon}}"></span>

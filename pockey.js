@@ -1,4 +1,14 @@
 angular.module('Pockey', [])
+
+	.filter('signedCurrency', function($window, $filter) {
+		return function(input) {
+			var prefix = (input >= 0) ? '+' : '-';
+			var absolute = $window.Math.abs(input);
+
+			return prefix + ' ' + $filter('number')(absolute) + ' €';
+		};
+	})
+
 	.controller('ListController', ['$scope', '$window', function ($scope, $window) {
 
 		var budget = 500;
