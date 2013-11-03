@@ -1,3 +1,7 @@
 BODY>.container {
 	margin-top: 70px
 }
+
+.capitalized {
+	text-transform: capitalize;
+}
