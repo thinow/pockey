@@ -34,7 +34,8 @@ angular.module('Pockey', [])
 
 	.config(function($routeProvider) {
 		$routeProvider
-			.when('/', { controller : 'ListController', templateUrl : 'list.html' })
+			.when('/',			{ controller : 'ListController',	templateUrl : 'list.html' })
+			.when('/add-entry',	{ controller : 'AddController',		templateUrl : 'detail.html' })
 			.otherwise({ redirectTo : '/' });
 	})
 
@@ -66,4 +67,8 @@ angular.module('Pockey', [])
 	
 			return $data.budget - allExpensesCost;
 		};
+	}])
+
+	.controller('AddController', ['$scope', '$data', function ($scope, $data) {
+
 	}]);
