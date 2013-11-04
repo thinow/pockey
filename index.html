@@ -1,0 +1,50 @@
+<!doctype html>
+<html ng-app="Pockey">
+<head>
+	<title>Pockey</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="pockey.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+	<script src="http://code.angularjs.org/1.0.8/i18n/angular-locale_fr-fr.js"></script>
+	<script src="pockey.js"></script>
+</head>
+<body ng-controller="ListController">
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<span class="navbar-brand">Pockey</span>
+			<ul class="nav navbar-nav pull-right">
+				<li><a href="#" class="capitalized">{{ findLastDate() | date:'MMMM' }}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="page-content container">
+		<div class="summary">
+			<span class="total">{{ computeTotal() | signedCurrency }}</span>
+			<div class="buttons pull-right">
+				<a href="#/next-month" class="btn btn-block btn-default">
+					<span class="glyphicon glyphicon-forward"></span> Mois suivant
+				</a>
+				<a href="#/add-entry" class="btn btn-block btn-primary">
+					<span class="glyphicon glyphicon-plus"></span>
+				</a>
+			</div>
+		</div>
+		<table class="detail table table-condensed table-striped">
+			<tbody>
+				<tr ng-repeat="expense in expenses">
+					<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
+					<td>{{ -expense.cost | signedCurrency }}</td>
+					<td>
+						<span title="{{expense.category.text}}" class="btn btn-{{expense.category.color}}">
+							<span class="glyphicon glyphicon-{{expense.category.icon}}"></span>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
