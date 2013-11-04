@@ -32,13 +32,11 @@ angular.module('Pockey', [])
 		}
 	})
 
-	.controller('ListController', ['$scope', '$data', '$window', function ($scope, $data, $window) {
-
-		$scope.expenses = $data.expenses;
+	.controller('HeaderController', ['$scope', '$data', '$window', function ($scope, $data, $window) {
 
 		$scope.findLastDate = function() {
 			var dates = new Array();
-			angular.forEach($scope.expenses, function(expense) {
+			angular.forEach($data.expenses, function(expense) {
 				dates.push(new Date(expense.date).getTime());
 			});
 	
@@ -48,6 +46,11 @@ angular.module('Pockey', [])
 		max = function(array) {
 			return $window.Math.max.apply(null, array);
 		};
+	}])
+
+	.controller('ListController', ['$scope', '$data', function ($scope, $data) {
+
+		$scope.expenses = $data.expenses;
 
 		$scope.computeTotal = function() {
 			var allExpensesCost = 0;

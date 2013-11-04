@@ -11,8 +11,8 @@
 	<script src="http://code.angularjs.org/1.0.8/i18n/angular-locale_fr-fr.js"></script>
 	<script src="pockey.js"></script>
 </head>
-<body ng-controller="ListController">
-	<div class="navbar navbar-default navbar-fixed-top">
+<body>
+	<div ng-controller="HeaderController" class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<span class="navbar-brand">Pockey</span>
 			<ul class="nav navbar-nav pull-right">
@@ -20,7 +20,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="page-content container">
+	<div ng-controller="ListController" class="page-content container">
 		<div class="summary">
 			<span class="total">{{ computeTotal() | signedCurrency }}</span>
 			<div class="buttons pull-right">
