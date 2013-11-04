@@ -32,6 +32,12 @@ angular.module('Pockey', [])
 		}
 	})
 
+	.config(function($routeProvider) {
+		$routeProvider
+			.when('/', { controller : 'ListController', templateUrl : 'list.html' })
+			.otherwise({ redirectTo : '/' });
+	})
+
 	.controller('HeaderController', ['$scope', '$data', '$window', function ($scope, $data, $window) {
 
 		$scope.findLastDate = function() {

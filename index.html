@@ -20,31 +20,6 @@
 			</ul>
 		</div>
 	</div>
-	<div ng-controller="ListController" class="page-content container">
-		<div class="summary">
-			<span class="total">{{ computeTotal() | signedCurrency }}</span>
-			<div class="buttons pull-right">
-				<a href="#/next-month" class="btn btn-block btn-default">
-					<span class="glyphicon glyphicon-forward"></span> Mois suivant
-				</a>
-				<a href="#/add-entry" class="btn btn-block btn-primary">
-					<span class="glyphicon glyphicon-plus"></span>
-				</a>
-			</div>
-		</div>
-		<table class="detail table table-condensed table-striped">
-			<tbody>
-				<tr ng-repeat="expense in expenses">
-					<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
-					<td>{{ -expense.cost | signedCurrency }}</td>
-					<td>
-						<span title="{{expense.category.text}}" class="btn btn-{{expense.category.color}}">
-							<span class="glyphicon glyphicon-{{expense.category.icon}}"></span>
-						</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	<div ng-view class="page-content container"></div>
 </body>
 </html>
