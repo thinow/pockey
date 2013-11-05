@@ -1,14 +1,14 @@
-<form name="expenseForm">
+<form name="form">
 
-	<div class="control-group" ng-class="{error: myForm.cost.$invalid}">
+	<div ng-class="{error: form.cost.$invalid}">
 		<label>Montant</label>
-		<input type="number" name="cost" ng-model="expense.cost" required
-			placeholder="0" />
-		<span ng-show="myForm.cost.$error.required" class="help-inline">Obligatoire</span>
+		<input type="number" name="cost" ng-model="expense.cost" placeholder="0" required />
+		<span ng-show="form.cost.$error.required">Obligatoire</span>
+		<span ng-show="form.cost.$error.number">Mauvais format</span>
 	</div>
 	
 	<a href="#/" class="btn btn-cancel">&laquo; Annuler</a>
-	<button ng-click="save()" class="btn btn-primary">
+	<button class="btn btn-primary" ng-click="save()" ng-disabled="!form.$valid">
 		<span class="glyphicon glyphicon-plus"></span> Ajouter
 	</button>
 

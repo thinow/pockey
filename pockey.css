@@ -9,4 +9,5 @@
 .detail .btn:HOVER		{ cursor: default; }
 .detail td:nth-child(2)	{ color: #00c; font-weight: bold; }
 
-.capitalized { text-transform: capitalize; }
+.capitalized	{ text-transform: capitalize; }
+.error			{ color: #900; font-style: italic; }
