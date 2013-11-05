@@ -71,6 +71,8 @@ angular.module('Pockey', [])
 
 	.controller('AddController', ['$scope', '$data', 'CATEGORIES', '$location', function ($scope, $data, CATEGORIES, $location) {
 
+		$scope.categories = CATEGORIES;
+
 		$scope.save = function() {
 			$data.expenses.push(
 					{ date : '2013-11-04', cost : $scope.expense.cost, category : CATEGORIES[4] });

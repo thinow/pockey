@@ -8,6 +8,14 @@
 		<span ng-show="form.cost.$error.number">Mauvais format</span>
 	</div>
 
+	<div ng-class="{error: form.category.$invalid}">
+		<label>Catégorie</label>
+		<select name="category" ng-model="expense.category"
+			ng-options="category.text for category in categories"
+			required></select>
+		<span ng-show="form.category.$error.required">Obligatoire</span>
+	</div>
+
 	<div ng-class="{error: form.date.$invalid}">
 		<label>Date</label>
 		<input type="date" name="date" ng-model="expense.date"
