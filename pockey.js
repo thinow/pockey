@@ -74,8 +74,7 @@ angular.module('Pockey', [])
 		$scope.categories = CATEGORIES;
 
 		$scope.save = function() {
-			$data.expenses.push(
-					{ date : '2013-11-04', cost : $scope.expense.cost, category : CATEGORIES[4] });
+			$data.expenses.push($scope.expense);
 			$location.path('/');
 		};
 
