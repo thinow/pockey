@@ -61,7 +61,7 @@ angular.module('Pockey', [])
 
 		$scope.computeTotal = function() {
 			var allExpensesCost = 0;
-			angular.forEach($scope.expenses, function(expense) {
+			angular.forEach($data.expenses, function(expense) {
 				allExpensesCost += expense.cost;
 			});
 	
