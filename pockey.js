@@ -20,14 +20,16 @@ angular.module('Pockey', [])
 	.factory('$data', function(CATEGORIES) {
 		return {
 			budget : 500,
+			
+			month : '2013-11-01',
 
 			expenses : [
-			    { date : '2013-10-15',	cost : 35,	category : CATEGORIES[0] },
-			    { date : '2013-10-14',	cost : 12,	category : CATEGORIES[1] },
-			    { date : '2013-10-10',	cost : 21,	category : CATEGORIES[2] },
-			    { date : '2013-10-10',	cost : 5,	category : CATEGORIES[3] },
-			    { date : '2013-10-08',	cost : 8,	category : CATEGORIES[4] },
-			    { date : '2013-10-07',	cost : 15,	category : CATEGORIES[2] }
+			    { date : '2013-11-15',	cost : 35,	category : CATEGORIES[0] },
+			    { date : '2013-11-14',	cost : 12,	category : CATEGORIES[1] },
+			    { date : '2013-11-10',	cost : 21,	category : CATEGORIES[2] },
+			    { date : '2013-11-10',	cost : 5,	category : CATEGORIES[3] },
+			    { date : '2013-11-08',	cost : 8,	category : CATEGORIES[4] },
+			    { date : '2013-11-07',	cost : 15,	category : CATEGORIES[2] }
 			]
 		}
 	})
@@ -41,18 +43,10 @@ angular.module('Pockey', [])
 
 	.controller('HeaderController', ['$scope', '$data', '$window', function ($scope, $data, $window) {
 
-		$scope.findLastDate = function() {
-			var dates = new Array();
-			angular.forEach($data.expenses, function(expense) {
-				dates.push(new Date(expense.date).getTime());
-			});
-	
-			return max(dates);
+		$scope.findCurrentMonth = function() {
+			return $data.month;
 		};
 
-		max = function(array) {
-			return $window.Math.max.apply(null, array);
-		};
 	}])
 
 	.controller('ListController', ['$scope', '$data', function ($scope, $data) {
