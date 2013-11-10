@@ -11,7 +11,7 @@
 </div>
 <table class="detail table table-condensed table-striped">
 	<tbody>
-		<tr ng-repeat="expense in expenses">
+		<tr ng-repeat="expense in expenses | orderBy:'date':true">
 			<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
 			<td>{{ -expense.cost | signedCurrency }}</td>
 			<td>
