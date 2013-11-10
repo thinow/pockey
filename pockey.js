@@ -67,6 +67,21 @@ angular.module('Pockey', [])
 
 		$scope.categories = CATEGORIES;
 
+		$scope.findDaysOfMonth = function() {
+			return {
+				first : new Date(currentYear(), currentMonth(), 1),
+				last  : new Date(currentYear(), currentMonth() + 1, 0)
+			};
+		};
+
+		currentMonth = function() {
+			return new Date($data.month).getMonth();
+		};
+
+		currentYear = function() {
+			return new Date($data.month).getFullYear();
+		};
+
 		$scope.save = function() {
 			$data.expenses.push($scope.expense);
 			$location.path('/');
