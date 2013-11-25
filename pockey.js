@@ -1,4 +1,4 @@
-angular.module('Pockey', [])
+angular.module('Pockey', ['firebase'])
 
 	.filter('signedCurrency', function($window, $filter) {
 		return function(input) {
@@ -9,6 +9,8 @@ angular.module('Pockey', [])
 		};
 	})
 
+	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com/')
+
 	.constant('CATEGORIES', [
 	    { text : 'Repas',	icon : 'cutlery',	color : 'danger' },
 	    { text : 'Loisirs',	icon : 'film',		color : 'primary' },
@@ -17,21 +19,8 @@ angular.module('Pockey', [])
 	    { text : 'Divers',	icon : 'euro',		color : 'info' }
 	])
 
-	.factory('$data', function(CATEGORIES) {
-		return {
-			budget : 500,
-			
-			month : '2013-11-01',
-
-			expenses : [
-			    { date : '2013-11-15',	cost : 35,	category : CATEGORIES[0] },
-			    { date : '2013-11-14',	cost : 12,	category : CATEGORIES[1] },
-			    { date : '2013-11-10',	cost : 21,	category : CATEGORIES[2] },
-			    { date : '2013-11-10',	cost : 5,	category : CATEGORIES[3] },
-			    { date : '2013-11-08',	cost : 8,	category : CATEGORIES[4] },
-			    { date : '2013-11-07',	cost : 15,	category : CATEGORIES[2] }
-			]
-		}
+	.factory('$data', function(angularFireCollection, REMOTE_SERVER, CATEGORIES) {
+		return angularFireCollection(REMOTE_SERVER); 
 	})
 
 	.config(function($routeProvider) {
