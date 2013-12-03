@@ -9,7 +9,7 @@ angular.module('Pockey', ['firebase'])
 		};
 	})
 
-	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com/')
+	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
 
 	.constant('CATEGORIES', [
 	    { text : 'Repas',	icon : 'cutlery',	color : 'danger' },
@@ -19,8 +19,12 @@ angular.module('Pockey', ['firebase'])
 	    { text : 'Divers',	icon : 'euro',		color : 'info' }
 	])
 
-	.factory('$data', function(angularFireCollection, REMOTE_SERVER, CATEGORIES) {
-		return angularFireCollection(REMOTE_SERVER); 
+	.constant('MONTH', '2013-12-01')
+
+	.constant('BUDGET', 500)
+
+	.factory('$expenses', function(angularFireCollection, REMOTE_SERVER, CATEGORIES) {
+		return angularFireCollection(REMOTE_SERVER + '/expenses'); 
 	})
 
 	.config(function($routeProvider) {
@@ -30,29 +34,27 @@ angular.module('Pockey', ['firebase'])
 			.otherwise({ redirectTo : '/' });
 	})
 
-	.controller('HeaderController', ['$scope', '$data', '$window', function ($scope, $data, $window) {
+	.controller('HeaderController', ['$scope', 'MONTH', function ($scope, MONTH) {
 
-		$scope.findCurrentMonth = function() {
-			return $data.month;
-		};
+		$scope.month = MONTH;
 
 	}])
 
-	.controller('ListController', ['$scope', '$data', function ($scope, $data) {
+	.controller('ListController', ['$scope', '$expenses', 'BUDGET', function ($scope, $expenses, BUDGET) {
 
-		$scope.expenses = $data.expenses;
+		$scope.expenses = $expenses;
 
 		$scope.computeTotal = function() {
 			var allExpensesCost = 0;
-			angular.forEach($data.expenses, function(expense) {
+			angular.forEach($expenses, function(expense) {
 				allExpensesCost += expense.cost;
 			});
 	
-			return $data.budget - allExpensesCost;
+			return BUDGET - allExpensesCost;
 		};
 	}])
 
-	.controller('AddController', ['$scope', '$data', 'CATEGORIES', '$location', function ($scope, $data, CATEGORIES, $location) {
+	.controller('AddController', ['$scope', '$expenses', 'MONTH', 'CATEGORIES', '$location', function ($scope, $expenses, MONTH, CATEGORIES, $location) {
 
 		$scope.categories = CATEGORIES;
 
@@ -64,15 +66,15 @@ angular.module('Pockey', ['firebase'])
 		};
 
 		currentMonth = function() {
-			return new Date($data.month).getMonth();
+			return new Date(MONTH).getMonth();
 		};
 
 		currentYear = function() {
-			return new Date($data.month).getFullYear();
+			return new Date(MONTH).getFullYear();
 		};
 
 		$scope.save = function() {
-			$data.expenses.push($scope.expense);
+			$expenses.add($scope.expense);
 			$location.path('/');
 		};
 
