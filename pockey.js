@@ -1,4 +1,4 @@
-angular.module('Pockey', [])
+angular.module('Pockey', ['firebase'])
 
 	.filter('signedCurrency', function($window, $filter) {
 		return function(input) {
@@ -9,46 +9,73 @@ angular.module('Pockey', [])
 		};
 	})
 
-	.controller('ListController', ['$scope', '$window', function ($scope, $window) {
+	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
 
-		var budget = 500;
+	.constant('CATEGORIES', [
+	    { text : 'Repas',	icon : 'cutlery',	color : 'danger' },
+	    { text : 'Loisirs',	icon : 'film',		color : 'primary' },
+	    { text : 'Soirées',	icon : 'glass',		color : 'warning' },
+	    { text : 'Amis',	icon : 'user',		color : 'success' },
+	    { text : 'Divers',	icon : 'euro',		color : 'info' }
+	])
 
-		$scope.categories = [
-		    { text : 'Repas',	icon : 'cutlery',	color : 'danger' },
-		    { text : 'Loisirs',	icon : 'film',		color : 'primary' },
-		    { text : 'Soirées',	icon : 'glass',		color : 'warning' },
-		    { text : 'Amis',	icon : 'user',		color : 'success' },
-		    { text : 'Divers',	icon : 'euro',		color : 'info' }
-		];
+	.constant('MONTH', '2013-12-01')
 
-		$scope.expenses = [
-		    { date : '2013-10-15',	cost : 35,	category : $scope.categories[0] },
-		    { date : '2013-10-14',	cost : 12,	category : $scope.categories[1] },
-		    { date : '2013-10-10',	cost : 21,	category : $scope.categories[2] },
-		    { date : '2013-10-10',	cost : 5,	category : $scope.categories[3] },
-		    { date : '2013-10-08',	cost : 8,	category : $scope.categories[4] },
-		    { date : '2013-10-07',	cost : 15,	category : $scope.categories[2] }
-		];
+	.constant('BUDGET', 500)
 
-		$scope.findLastDate = function() {
-			var dates = new Array();
-			angular.forEach($scope.expenses, function(expense) {
-				dates.push(new Date(expense.date).getTime());
-			});
-	
-			return max(dates);
-		};
+	.factory('$expenses', function(angularFireCollection, REMOTE_SERVER, CATEGORIES) {
+		return angularFireCollection(REMOTE_SERVER + '/expenses'); 
+	})
 
-		max = function(array) {
-			return $window.Math.max.apply(null, array);
-		};
+	.config(function($routeProvider) {
+		$routeProvider
+			.when('/',			{ controller : 'ListController',	templateUrl : 'list.html' })
+			.when('/add-entry',	{ controller : 'AddController',		templateUrl : 'detail.html' })
+			.otherwise({ redirectTo : '/' });
+	})
+
+	.controller('HeaderController', ['$scope', 'MONTH', function ($scope, MONTH) {
+
+		$scope.month = MONTH;
+
+	}])
+
+	.controller('ListController', ['$scope', '$expenses', 'BUDGET', function ($scope, $expenses, BUDGET) {
+
+		$scope.expenses = $expenses;
 
 		$scope.computeTotal = function() {
 			var allExpensesCost = 0;
-			angular.forEach($scope.expenses, function(expense) {
+			angular.forEach($expenses, function(expense) {
 				allExpensesCost += expense.cost;
 			});
 	
-			return budget - allExpensesCost;
+			return BUDGET - allExpensesCost;
 		};
+	}])
+
+	.controller('AddController', ['$scope', '$expenses', 'MONTH', 'CATEGORIES', '$location', function ($scope, $expenses, MONTH, CATEGORIES, $location) {
+
+		$scope.categories = CATEGORIES;
+
+		$scope.findDaysOfMonth = function() {
+			return {
+				first : new Date(currentYear(), currentMonth(), 1),
+				last  : new Date(currentYear(), currentMonth() + 1, 0)
+			};
+		};
+
+		currentMonth = function() {
+			return new Date(MONTH).getMonth();
+		};
+
+		currentYear = function() {
+			return new Date(MONTH).getFullYear();
+		};
+
+		$scope.save = function() {
+			$expenses.add($scope.expense);
+			$location.path('/');
+		};
+
 	}]);
