@@ -23,7 +23,7 @@ angular.module('Pockey', ['firebase'])
 
 	.constant('BUDGET', 500)
 
-	.factory('$expenses', function(angularFireCollection, REMOTE_SERVER, CATEGORIES) {
+	.factory('$expenses', function(angularFireCollection, REMOTE_SERVER) {
 		return angularFireCollection(REMOTE_SERVER + '/expenses'); 
 	})
 
