@@ -1,9 +1,9 @@
 <div class="summary">
 	<span class="total">{{ computeTotal() | signedCurrency }}</span>
 	<div class="buttons pull-right">
-		<a href="#/next-month" class="btn btn-block btn-default">
+		<button ng-click="startNextMonth()" class="btn btn-block btn-default">
 			<span class="glyphicon glyphicon-forward"></span> Mois suivant
-		</a>
+		</button>
 		<a href="#/add-entry" class="btn btn-block btn-primary">
 			<span class="glyphicon glyphicon-plus"></span>
 		</a>

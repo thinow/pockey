@@ -46,7 +46,7 @@ angular.module('Pockey', ['firebase'])
 
 	}])
 
-	.controller('ListController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
+	.controller('ListController', ['$scope', 'RemoteService', '$filter', function ($scope, RemoteService, $filter) {
 
 		RemoteService.injectNumber($scope, 'budget');
 		RemoteService.injectCollection($scope, 'expenses');
@@ -58,6 +58,10 @@ angular.module('Pockey', ['firebase'])
 			});
 	
 			return $scope.budget - allExpensesCost;
+		};
+
+		$scope.startNextMonth = function() {
+			$scope.month = $filter('date')(new Date(2014, 0, 1), 'yyyy-MM-dd');
 		};
 	}])
 
