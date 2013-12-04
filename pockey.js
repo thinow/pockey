@@ -11,20 +11,16 @@ angular.module('Pockey', ['firebase'])
 
 	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
 
-	.constant('CATEGORIES', [
-	    { text : 'Repas',	icon : 'cutlery',	color : 'danger' },
-	    { text : 'Loisirs',	icon : 'film',		color : 'primary' },
-	    { text : 'Soirées',	icon : 'glass',		color : 'warning' },
-	    { text : 'Amis',	icon : 'user',		color : 'success' },
-	    { text : 'Divers',	icon : 'euro',		color : 'info' }
-	])
-
 	.constant('MONTH', '2013-12-01')
 
 	.constant('BUDGET', 500)
 
-	.factory('$expenses', function(angularFireCollection, REMOTE_SERVER, CATEGORIES) {
+	.factory('$expenses', function(angularFireCollection, REMOTE_SERVER) {
 		return angularFireCollection(REMOTE_SERVER + '/expenses'); 
+	})
+
+	.factory('$categories', function(angularFireCollection, REMOTE_SERVER) {
+		return angularFireCollection(REMOTE_SERVER + '/categories'); 
 	})
 
 	.config(function($routeProvider) {
@@ -54,9 +50,9 @@ angular.module('Pockey', ['firebase'])
 		};
 	}])
 
-	.controller('AddController', ['$scope', '$expenses', 'MONTH', 'CATEGORIES', '$location', function ($scope, $expenses, MONTH, CATEGORIES, $location) {
+	.controller('AddController', ['$scope', '$expenses', 'MONTH', '$categories', '$location', function ($scope, $expenses, MONTH, $categories, $location) {
 
-		$scope.categories = CATEGORIES;
+		$scope.categories = $categories;
 
 		$scope.findDaysOfMonth = function() {
 			return {
@@ -74,8 +70,29 @@ angular.module('Pockey', ['firebase'])
 		};
 
 		$scope.save = function() {
+			$scope.expense.category = createSerializable($scope.expense.category);
 			$expenses.add($scope.expense);
 			$location.path('/');
+		};
+
+		createSerializable = function(source) {
+			var copy = copyObject(source);
+			return removeKeys(copy, ['$id', '$index', '$ref']);
+		};
+
+		copyObject = function(source) {
+			var copy = {};
+			angular.forEach(source, function(value, key) {
+				copy[key] = value;
+			});
+			return copy;
+		};
+
+		removeKeys = function(object, keysToRemove) {
+			angular.forEach(keysToRemove, function(keyToRemove) {
+				delete object[keyToRemove];
+			});
+			return object;
 		};
 
 	}]);
