@@ -11,16 +11,26 @@ angular.module('Pockey', ['firebase'])
 
 	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
 
-	.constant('MONTH', '2013-12-01')
+	.factory('RemoteService', function(REMOTE_SERVER, angularFire, angularFireCollection) {
+		return {
+			injectCollection : function(parent, name) {
+				var collection = angularFireCollection(REMOTE_SERVER + '/' + name);
+				parent[name] = collection;
+			},
 
-	.constant('BUDGET', 500)
+			injectNumber : function(parent, property) {
+				this.inject(parent, property, 0);
+			},
 
-	.factory('$expenses', function(angularFireCollection, REMOTE_SERVER) {
-		return angularFireCollection(REMOTE_SERVER + '/expenses'); 
-	})
+			injectString : function(parent, property) {
+				this.inject(parent, property, '');
+			},
 
-	.factory('$categories', function(angularFireCollection, REMOTE_SERVER) {
-		return angularFireCollection(REMOTE_SERVER + '/categories'); 
+			inject : function(parent, property, type) {
+				var ref = new Firebase(REMOTE_SERVER + '/' + property);
+				angularFire(ref, parent, property, type);
+			}
+		};
 	})
 
 	.config(function($routeProvider) {
@@ -30,29 +40,32 @@ angular.module('Pockey', ['firebase'])
 			.otherwise({ redirectTo : '/' });
 	})
 
-	.controller('HeaderController', ['$scope', 'MONTH', function ($scope, MONTH) {
+	.controller('HeaderController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
 
-		$scope.month = MONTH;
+		RemoteService.injectString($scope, 'month');
 
 	}])
 
-	.controller('ListController', ['$scope', '$expenses', 'BUDGET', function ($scope, $expenses, BUDGET) {
+	.controller('ListController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
 
-		$scope.expenses = $expenses;
+		RemoteService.injectNumber($scope, 'budget');
+		RemoteService.injectCollection($scope, 'expenses');
 
 		$scope.computeTotal = function() {
 			var allExpensesCost = 0;
-			angular.forEach($expenses, function(expense) {
+			angular.forEach($scope.expenses, function(expense) {
 				allExpensesCost += expense.cost;
 			});
 	
-			return BUDGET - allExpensesCost;
+			return $scope.budget - allExpensesCost;
 		};
 	}])
 
-	.controller('AddController', ['$scope', '$expenses', 'MONTH', '$categories', '$location', function ($scope, $expenses, MONTH, $categories, $location) {
+	.controller('AddController', ['$scope', 'RemoteService', '$location', function ($scope, RemoteService, $location) {
 
-		$scope.categories = $categories;
+		RemoteService.injectString($scope, 'month');
+		RemoteService.injectCollection($scope, 'categories');
+		RemoteService.injectCollection($scope, 'expenses');
 
 		$scope.findDaysOfMonth = function() {
 			return {
@@ -62,11 +75,11 @@ angular.module('Pockey', ['firebase'])
 		};
 
 		currentMonth = function() {
-			return new Date(MONTH).getMonth();
+			return new Date($scope.month).getMonth();
 		};
 
 		currentYear = function() {
-			return new Date(MONTH).getFullYear();
+			return new Date($scope.month).getFullYear();
 		};
 
 		$scope.save = function() {
