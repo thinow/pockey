@@ -30,9 +30,9 @@ angular.module('Pockey', ['firebase'])
 			.otherwise({ redirectTo : '/' });
 	})
 
-	.controller('HeaderController', ['$scope', 'MONTH', function ($scope, MONTH) {
-
-		$scope.month = MONTH;
+	.controller('HeaderController', ['$scope', 'angularFire', 'REMOTE_SERVER', function ($scope, angularFire, REMOTE_SERVER) {
+		
+		angularFire(new Firebase(REMOTE_SERVER + '/parameters/month'), $scope, 'month', '');
 
 	}])
 
