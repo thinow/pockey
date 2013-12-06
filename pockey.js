@@ -73,6 +73,12 @@ angular.module('Pockey', ['firebase'])
 			findLastDayOfMonth : function(string) {
 				var date = this.createDate(string);
 				return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+			},
+
+			findNextMonth : function(string) {
+				var date = this.createDate(string);
+				date.setMonth(date.getMonth() + 1);
+				return date;
 			}
 		};
 	})
@@ -110,7 +116,7 @@ angular.module('Pockey', ['firebase'])
 		};
 
 		$scope.startNextMonth = function() {
-			var nextMonth = DateService.createDate($scope.month);
+			var nextMonth = DateService.findNextMonth($scope.month);
 			$scope.month = DateService.format(nextMonth);
 		};
 	}])
