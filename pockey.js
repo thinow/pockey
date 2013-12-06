@@ -53,6 +53,28 @@ angular.module('Pockey', ['firebase'])
 		};
 	})
 
+	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
+
+	.factory('DateService', function($filter) {
+		return {
+			createDate : function(string) {
+				return new Date(string);
+			},
+
+			format : function(date) {
+				return $filter('date')(date, 'yyyy-MM-dd');
+			},
+
+			findFirstDayOfMonth : function(date) {
+				return new Date(date.getFullYear(), date.getMonth(), 1);
+			},
+
+			findLastDayOfMonth : function(date) {
+				return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+			}
+		};
+	})
+
 	.config(function($routeProvider) {
 		$routeProvider
 			.when('/',			{ controller : 'ListController',	templateUrl : 'list.html' })
@@ -66,10 +88,15 @@ angular.module('Pockey', ['firebase'])
 
 	}])
 
-	.controller('ListController', ['$scope', 'RemoteService', '$filter', function ($scope, RemoteService, $filter) {
+	.controller('ListController', ['$scope', 'RemoteService', 'DateService', function ($scope, RemoteService, DateService) {
 
 		RemoteService.injectNumber($scope, 'budget');
+		RemoteService.injectString($scope, 'month');
 		RemoteService.injectCollection($scope, 'expenses');
+		
+		$scope.monthAsDate = function() {
+			return DateService.createDate($scope.month);
+		};
 
 		$scope.computeTotal = function() {
 			var allExpensesCost = 0;
@@ -81,29 +108,23 @@ angular.module('Pockey', ['firebase'])
 		};
 
 		$scope.startNextMonth = function() {
-			$scope.month = $filter('date')(new Date(2014, 0, 1), 'yyyy-MM-dd');
+			var nextMonth = DateService.createDate($scope.month);
+			$scope.month = DateService.format(nextMonth);
 		};
 	}])
 
-	.controller('AddController', ['$scope', 'RemoteService', '$location', function ($scope, RemoteService, $location) {
+	.controller('AddController', ['$scope', '$location', 'RemoteService', 'DateService', function ($scope, $location, RemoteService, DateService) {
 
 		RemoteService.injectString($scope, 'month');
 		RemoteService.injectCollection($scope, 'categories');
 		RemoteService.injectCollection($scope, 'expenses');
 
 		$scope.findDaysOfMonth = function() {
+			var monthAsDate = DateService.createDate($scope.month);
 			return {
-				first : new Date(currentYear(), currentMonth(), 1),
-				last  : new Date(currentYear(), currentMonth() + 1, 0)
+				first	: DateService.findFirstDayOfMonth(monthAsDate),
+				last	: DateService.findLastDayOfMonth(monthAsDate)
 			};
-		};
-
-		currentMonth = function() {
-			return new Date($scope.month).getMonth();
-		};
-
-		currentYear = function() {
-			return new Date($scope.month).getFullYear();
 		};
 
 		$scope.save = function() {
