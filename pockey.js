@@ -29,6 +29,26 @@ angular.module('Pockey', ['firebase'])
 			inject : function(parent, property, type) {
 				var ref = new Firebase(REMOTE_SERVER + '/' + property);
 				angularFire(ref, parent, property, type);
+			},
+
+			serialize : function(source) {
+				var copy = this.copyObject(source);
+				return this.removeKeys(copy, ['$id', '$index', '$ref']);
+			},
+
+			copyObject : function(source) {
+				var copy = {};
+				angular.forEach(source, function(value, key) {
+					copy[key] = value;
+				});
+				return copy;
+			},
+
+			removeKeys : function(object, keysToRemove) {
+				angular.forEach(keysToRemove, function(keyToRemove) {
+					delete object[keyToRemove];
+				});
+				return object;
 			}
 		};
 	})
@@ -87,29 +107,9 @@ angular.module('Pockey', ['firebase'])
 		};
 
 		$scope.save = function() {
-			$scope.expense.category = createSerializable($scope.expense.category);
+			$scope.expense.category = RemoteService.serialize($scope.expense.category);
 			$scope.expenses.add($scope.expense);
 			$location.path('/');
-		};
-
-		createSerializable = function(source) {
-			var copy = copyObject(source);
-			return removeKeys(copy, ['$id', '$index', '$ref']);
-		};
-
-		copyObject = function(source) {
-			var copy = {};
-			angular.forEach(source, function(value, key) {
-				copy[key] = value;
-			});
-			return copy;
-		};
-
-		removeKeys = function(object, keysToRemove) {
-			angular.forEach(keysToRemove, function(keyToRemove) {
-				delete object[keyToRemove];
-			});
-			return object;
 		};
 
 	}]);
