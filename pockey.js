@@ -84,7 +84,7 @@ angular.module('Pockey', ['firebase'])
 
 		$scope.save = function() {
 			$scope.expense.category = createSerializable($scope.expense.category);
-			$expenses.add($scope.expense);
+			$scope.expenses.add($scope.expense);
 			$location.path('/');
 		};
 
