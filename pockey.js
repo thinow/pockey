@@ -65,11 +65,13 @@ angular.module('Pockey', ['firebase'])
 				return $filter('date')(date, 'yyyy-MM-dd');
 			},
 
-			findFirstDayOfMonth : function(date) {
+			findFirstDayOfMonth : function(string) {
+				var date = this.createDate(string);
 				return new Date(date.getFullYear(), date.getMonth(), 1);
 			},
 
-			findLastDayOfMonth : function(date) {
+			findLastDayOfMonth : function(string) {
+				var date = this.createDate(string);
 				return new Date(date.getFullYear(), date.getMonth() + 1, 0);
 			}
 		};
@@ -120,10 +122,9 @@ angular.module('Pockey', ['firebase'])
 		RemoteService.injectCollection($scope, 'expenses');
 
 		$scope.findDaysOfMonth = function() {
-			var monthAsDate = DateService.createDate($scope.month);
 			return {
-				first	: DateService.findFirstDayOfMonth(monthAsDate),
-				last	: DateService.findLastDayOfMonth(monthAsDate)
+				first	: DateService.findFirstDayOfMonth($scope.month),
+				last	: DateService.findLastDayOfMonth($scope.month)
 			};
 		};
 
