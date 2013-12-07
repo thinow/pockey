@@ -11,7 +11,7 @@ angular.module('Pockey', ['firebase'])
 
 	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
 
-	.factory('RemoteService', function(REMOTE_SERVER, angularFire, angularFireCollection) {
+	.factory('RemoteService', function(REMOTE_SERVER, angularFire, angularFireCollection, DateService, $log) {
 		return {
 			injectCollection : function(parent, name) {
 				var collection = angularFireCollection(REMOTE_SERVER + '/' + name);
@@ -27,8 +27,18 @@ angular.module('Pockey', ['firebase'])
 			},
 
 			inject : function(parent, property, type) {
-				var ref = new Firebase(REMOTE_SERVER + '/' + property);
-				angularFire(ref, parent, property, type);
+				var node = this.getNode(property);
+				angularFire(node, parent, property, type);
+			},
+
+			changeRemoteMonth : function(month) {
+				var formattedMonth = DateService.format(month);
+				this.getNode('month').set(formattedMonth);
+				this.getNode('expenses').remove();
+			},
+
+			getNode : function(name) {
+				return new Firebase(REMOTE_SERVER + '/' + name);
 			},
 
 			serialize : function(source) {
@@ -102,10 +112,6 @@ angular.module('Pockey', ['firebase'])
 		RemoteService.injectString($scope, 'month');
 		RemoteService.injectCollection($scope, 'expenses');
 		
-		$scope.monthAsDate = function() {
-			return DateService.createDate($scope.month);
-		};
-
 		$scope.computeTotal = function() {
 			var allExpensesCost = 0;
 			angular.forEach($scope.expenses, function(expense) {
@@ -117,7 +123,7 @@ angular.module('Pockey', ['firebase'])
 
 		$scope.startNextMonth = function() {
 			var nextMonth = DateService.findNextMonth($scope.month);
-			$scope.month = DateService.format(nextMonth);
+			RemoteService.changeRemoteMonth(nextMonth);
 		};
 	}])
 
