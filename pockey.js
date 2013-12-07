@@ -63,8 +63,6 @@ angular.module('Pockey', ['firebase'])
 		};
 	})
 
-	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
-
 	.factory('DateService', function($filter) {
 		return {
 			createDate : function(string) {
