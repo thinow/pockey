@@ -104,7 +104,7 @@ angular.module('Pockey', ['firebase'])
 
 	}])
 
-	.controller('ListController', ['$scope', 'RemoteService', 'DateService', function ($scope, RemoteService, DateService) {
+	.controller('ListController', ['$scope', '$window', 'RemoteService', 'DateService', function ($scope, $window, RemoteService, DateService) {
 
 		RemoteService.injectNumber($scope, 'budget');
 		RemoteService.injectString($scope, 'month');
@@ -120,8 +120,10 @@ angular.module('Pockey', ['firebase'])
 		};
 
 		$scope.startNextMonth = function() {
-			var nextMonth = DateService.findNextMonth($scope.month);
-			RemoteService.changeRemoteMonth(nextMonth);
+			if ($window.confirm('Passer au mois suivant ?')) {
+				var nextMonth = DateService.findNextMonth($scope.month);
+				RemoteService.changeRemoteMonth(nextMonth);
+			}
 		};
 	}])
 
