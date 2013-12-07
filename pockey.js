@@ -11,7 +11,7 @@ angular.module('Pockey', ['firebase'])
 
 	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
 
-	.factory('RemoteService', function(REMOTE_SERVER, angularFire, angularFireCollection, DateService, $log) {
+	.factory('RemoteService', function(REMOTE_SERVER, angularFire, angularFireCollection, DateService) {
 		return {
 			injectCollection : function(parent, name) {
 				var collection = angularFireCollection(REMOTE_SERVER + '/' + name);
