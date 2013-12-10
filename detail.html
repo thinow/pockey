@@ -26,8 +26,8 @@
 		<span ng-show="form.date.$error.pattern">Mauvais format (aaaa-mm-jj)</span>
 	</div>
 	
-	<a href="#/" class="btn btn-cancel">&laquo; Annuler</a>
-	<button class="btn btn-primary" ng-click="save()" ng-disabled="!form.$valid">
+	<a href="#/">&laquo; Annuler</a>
+	<button ng-click="save()" ng-disabled="!form.$valid">
 		<span class="glyphicon glyphicon-plus"></span> Ajouter
 	</button>
 

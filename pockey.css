@@ -1,13 +1,2 @@
-.page-content { margin-top: 70px }
-
-.total { color: #090; font-size: 3.5em; font-weight: bold; margin-left: 40%; }
-
-.buttons				{ width: 18%; margin-bottom: 2px; }
-.buttons .btn-default	{ color: #888; }
-
-.detail					{ width: 100%; text-align: center; }
-.detail .btn:HOVER		{ cursor: default; }
-.detail td:nth-child(2)	{ color: #00c; font-weight: bold; }
-
 .capitalized	{ text-transform: capitalize; }
 .error			{ color: #900; font-style: italic; }

@@ -1,21 +1,21 @@
-<div class="summary">
-	<span class="total">{{ computeTotal() | signedCurrency }}</span>
-	<div class="buttons pull-right">
-		<button ng-click="startNextMonth()" class="btn btn-block btn-default">
+<div>
+	<span>{{ computeTotal() | signedCurrency }}</span>
+	<div>
+		<button ng-click="startNextMonth()">
 			<span class="glyphicon glyphicon-forward"></span> Mois suivant
 		</button>
-		<a href="#/add-entry" class="btn btn-block btn-primary">
+		<a href="#/add-entry">
 			<span class="glyphicon glyphicon-plus"></span>
 		</a>
 	</div>
 </div>
-<table class="detail table table-condensed table-striped">
+<table>
 	<tbody>
 		<tr ng-repeat="expense in expenses | orderBy:'date':true">
 			<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
 			<td>{{ -expense.cost | signedCurrency }}</td>
 			<td>
-				<span title="{{expense.category.text}}" class="btn btn-{{expense.category.color}}">
+				<span title="{{expense.category.text}}" class="{{expense.category.color}}">
 					<span class="glyphicon glyphicon-{{expense.category.icon}}"></span>
 				</span>
 			</td>
