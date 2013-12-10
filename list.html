@@ -2,10 +2,10 @@
 	<span>{{ computeTotal() | signedCurrency }}</span>
 	<div>
 		<button ng-click="startNextMonth()">
-			<span class="glyphicon glyphicon-forward"></span> Mois suivant
+			<i class="fa fa-forward"></i> Mois suivant
 		</button>
 		<a href="#/add-entry">
-			<span class="glyphicon glyphicon-plus"></span>
+			<i class="fa fa-plus-circle"></i>
 		</a>
 	</div>
 </div>
@@ -16,7 +16,7 @@
 			<td>{{ -expense.cost | signedCurrency }}</td>
 			<td>
 				<span title="{{expense.category.text}}" class="{{expense.category.color}}">
-					<span class="glyphicon glyphicon-{{expense.category.icon}}"></span>
+					<i class="fa fa-{{expense.category.icon}}"></i>
 				</span>
 			</td>
 		</tr>
