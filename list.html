@@ -1,11 +1,11 @@
-<div>
-	<span>{{ computeTotal() | signedCurrency }}</span>
+<div class="menu">
+	<div>{{ computeTotal() | signedCurrency }}</div>
 	<div>
-		<button ng-click="startNextMonth()">
+		<a href="#/" ng-click="startNextMonth()" class="button">
 			<i class="fa fa-forward"></i> Mois suivant
-		</button>
-		<a href="#/add-entry">
-			<i class="fa fa-plus-circle"></i>
+		</a>
+		<a href="#/add-entry" class="button">
+			<i class="fa fa-plus-circle"></i> Ajouter
 		</a>
 	</div>
 </div>
