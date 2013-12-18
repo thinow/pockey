@@ -9,9 +9,9 @@
 		</a>
 	</div>
 </div>
-<table>
+<table class="list">
 	<tbody>
-		<tr ng-repeat="expense in expenses | orderBy:'date':true">
+		<tr ng-repeat="expense in expenses | orderBy:'date':true" ng-class-even="'even'">
 			<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
 			<td>{{ -expense.cost | signedCurrency }}</td>
 			<td>

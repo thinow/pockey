@@ -13,6 +13,10 @@ A    { text-decoration: none; }
 .menu DIV:nth-child(1) { width: 50%; font-size: 3em; color: #81c6dd; font-weight: bold; text-align: center; white-space: nowrap; }
 .menu .button          { width: 80%; margin: 0.1em 0em; }
 
+.list         { width: 80%; margin: 1.5em auto; }
+.list TR      { color: #e48743; }
+.list TR.even { color: #81c6dd; }
+
 .button               { background-color: #eee; color: #333; border: 1px solid #aaa; border-radius: 0.7em; padding: 0.3em; display: inline-block; text-align: center; }
 .button:HOVER         { background-color: #fff; }
 .button.primary       { background-color: #069; color: #fff; border: 1px solid #047; }
