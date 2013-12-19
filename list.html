@@ -1,4 +1,4 @@
-<div class="menu">
+<div class="menu content">
 	<div>{{ computeTotal() | signedCurrency }}</div>
 	<div>
 		<a href="#/" ng-click="startNextMonth()" class="button">
@@ -9,7 +9,7 @@
 		</a>
 	</div>
 </div>
-<table class="list">
+<table class="list content">
 	<tbody>
 		<tr ng-repeat="expense in expenses | orderBy:'date':true" ng-class-even="'even'">
 			<td>
