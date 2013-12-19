@@ -12,13 +12,13 @@
 <table class="list">
 	<tbody>
 		<tr ng-repeat="expense in expenses | orderBy:'date':true" ng-class-even="'even'">
-			<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
-			<td>{{ -expense.cost | signedCurrency }}</td>
 			<td>
-				<span title="{{expense.category.text}}" class="{{expense.category.color}}">
+				<span title="{{expense.category.text}}">
 					<i class="fa fa-{{expense.category.icon}}"></i>
 				</span>
 			</td>
+			<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
+			<td>{{ -expense.cost | signedCurrency }}</td>
 		</tr>
 	</tbody>
 </table>

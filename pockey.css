@@ -13,9 +13,11 @@ A    { text-decoration: none; }
 .menu DIV:nth-child(1) { width: 50%; font-size: 3em; color: #81c6dd; font-weight: bold; text-align: center; white-space: nowrap; }
 .menu .button          { width: 80%; margin: 0.1em 0em; }
 
-.list         { width: 80%; margin: 1.5em auto; }
-.list TR      { color: #e48743; }
-.list TR.even { color: #81c6dd; }
+.list                    { width: 95%; margin: 1.5em auto; font-size: 1.5em; color: #333; border-collapse: collapse; }
+.list TR                 { background-color: #eafae3; }
+.list TR.even            { background-color: #e1f2da; }
+.list TR TD              { text-align: center; padding: 0.2em 1em; }
+.list TR TD:nth-child(3) { text-align: right; }
 
 .button               { background-color: #eee; color: #333; border: 1px solid #aaa; border-radius: 0.7em; padding: 0.3em; display: inline-block; text-align: center; }
 .button:HOVER         { background-color: #fff; }
