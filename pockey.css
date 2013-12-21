@@ -1,6 +1,17 @@
 BODY { font-family: sans-serif; margin: 0; }
 A    { text-decoration: none; }
 
+.capitalized { text-transform: capitalize; }
+.error       { color: #e48743; font-style: italic; }
+
+.button               { background-color: #eee; color: #333; border: 1px solid #aaa; border-radius: 0.7em; padding: 0.3em; display: inline-block; font-size: 1em; text-align: center; }
+.button:HOVER         { background-color: #fff; }
+.button:DISABLED      { opacity: 0.5; }
+.button.primary       { background-color: #069; color: #fff; border: 1px solid #047; }
+.button.primary:HOVER { background-color: #08b; }
+.button.cancel        { background-color: transparent; color: #81c6dd; border-color: transparent; text-decoration: underline; }
+.button.cancel:HOVER  { background-color: transparent; }
+
 .header                   { background-color: #90ca77; color: #ffffff; height: 4em; }
 .header SPAN              { position: absolute; }
 .header SPAN:nth-child(1) { font-size: 3em; top: 0.05em; left: 4%; }
@@ -25,14 +36,3 @@ A    { text-decoration: none; }
 .form SPAN                { display: block; margin-left: 31%; }
 .form INPUT, .form SELECT { width: 50%; }
 .form .primary            { float: right; width: 35%; }
-
-.button               { background-color: #eee; color: #333; border: 1px solid #aaa; border-radius: 0.7em; padding: 0.3em; display: inline-block; font-size: 1em; text-align: center; }
-.button:HOVER         { background-color: #fff; }
-.button:DISABLED      { opacity: 0.5; }
-.button.primary       { background-color: #069; color: #fff; border: 1px solid #047; }
-.button.primary:HOVER { background-color: #08b; }
-.button.cancel        { background-color: transparent; color: #81c6dd; border-color: transparent; text-decoration: underline; }
-.button.cancel:HOVER  { background-color: transparent; }
-
-.capitalized { text-transform: capitalize; }
-.error       { color: #e48743; font-style: italic; }
