@@ -1,24 +1,24 @@
-<div class="summary">
-	<span class="total">{{ computeTotal() | signedCurrency }}</span>
-	<div class="buttons pull-right">
-		<button ng-click="startNextMonth()" class="btn btn-block btn-default">
-			<span class="glyphicon glyphicon-forward"></span> Mois suivant
-		</button>
-		<a href="#/add-entry" class="btn btn-block btn-primary">
-			<span class="glyphicon glyphicon-plus"></span>
+<div class="menu content">
+	<div>{{ computeTotal() | signedCurrency }}</div>
+	<div>
+		<a href="#/" ng-click="startNextMonth()" class="button">
+			<i class="fa fa-forward"></i> Mois suivant
+		</a>
+		<a href="#/add-entry" class="button primary">
+			<i class="fa fa-plus-circle"></i> Ajouter
 		</a>
 	</div>
 </div>
-<table class="detail table table-condensed table-striped">
+<table class="list content">
 	<tbody>
-		<tr ng-repeat="expense in expenses | orderBy:'date':true">
-			<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
-			<td>{{ -expense.cost | signedCurrency }}</td>
+		<tr ng-repeat="expense in expenses | orderBy:'date':true" ng-class-even="'even'">
 			<td>
-				<span title="{{expense.category.text}}" class="btn btn-{{expense.category.color}}">
-					<span class="glyphicon glyphicon-{{expense.category.icon}}"></span>
+				<span title="{{expense.category.text}}" class="{{expense.category.color}}">
+					<i class="fa fa-{{expense.category.icon}}"></i>
 				</span>
 			</td>
+			<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
+			<td>{{ -expense.cost | signedCurrency }}</td>
 		</tr>
 	</tbody>
 </table>

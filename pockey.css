@@ -1,13 +1,44 @@
-.page-content { margin-top: 70px }
+BODY { font-family: sans-serif; margin: 0; }
+A    { text-decoration: none; }
 
-.total { color: #090; font-size: 3.5em; font-weight: bold; margin-left: 40%; }
+.capitalized { text-transform: capitalize; }
+.error       { color: #e48743; font-style: italic; }
 
-.buttons				{ width: 18%; margin-bottom: 2px; }
-.buttons .btn-default	{ color: #888; }
+.button               { background-color: #eee; color: #333; border: 1px solid #aaa; border-radius: 0.7em; padding: 0.3em; display: inline-block; font-size: 1em; text-align: center; }
+.button:HOVER         { background-color: #fff; }
+.button:DISABLED      { opacity: 0.5; }
+.button.primary       { background-color: #069; color: #fff; border: 1px solid #047; }
+.button.primary:HOVER { background-color: #08b; }
+.button.cancel        { background-color: transparent; color: #81c6dd; border-color: transparent; text-decoration: underline; }
+.button.cancel:HOVER  { background-color: transparent; }
 
-.detail					{ width: 100%; text-align: center; }
-.detail .btn:HOVER		{ cursor: default; }
-.detail td:nth-child(2)	{ color: #00c; font-weight: bold; }
+.header                   { background-color: #90ca77; color: #ffffff; height: 4em; }
+.header SPAN              { position: absolute; }
+.header SPAN:nth-child(1) { font-size: 3em; top: 0.05em; left: 4%; }
+.header SPAN:nth-child(2) { font-size: 1em; top: 1.50em; right: 4%; min-width: 60%; text-align: right; }
 
-.capitalized	{ text-transform: capitalize; }
-.error			{ color: #900; font-style: italic; }
+.body    { margin-top: 0.5em; }
+.content { width: 95%; margin: 1.5em auto; }
+
+.menu DIV              { display: inline-block; }
+.menu DIV:nth-child(1) { width: 60%; font-size: 3em; color: #81c6dd; font-weight: bold; text-align: center; white-space: nowrap; }
+.menu DIV:nth-child(2) { width: 36%; }
+.menu .button          { width: 100%; margin: 0.1em 0em; }
+
+.list                    { font-size: 1.5em; color: #333; border-collapse: collapse; }
+.list TR                 { background-color: #eafae3; }
+.list TR.even            { background-color: #e1f2da; }
+.list TR TD              { text-align: center; padding: 0.2em 1em; }
+.list TR TD:nth-child(3) { text-align: right; }
+.list SPAN               { color: #fff; display: inline-block; width: 1.5em; border-radius: 0.3em; }
+.list SPAN.blue          { background-color: #3276b1; }
+.list SPAN.green         { background-color: #5cb85c; }
+.list SPAN.orange        { background-color: #f0ad4e; }
+.list SPAN.red           { background-color: #d9534f; }
+.list SPAN.light-blue    { background-color: #66ccff; }
+
+.form DIV                 { height: 3em; margin: 0.2em 0; }
+.form DIV LABEL           { display: inline-block; text-align: right; width: 30%; }
+.form SPAN                { display: block; margin-left: 31%; }
+.form INPUT, .form SELECT { width: 50%; }
+.form .primary            { float: right; width: 35%; }
