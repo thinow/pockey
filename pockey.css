@@ -20,10 +20,19 @@ A    { text-decoration: none; }
 .list TR TD              { text-align: center; padding: 0.2em 1em; }
 .list TR TD:nth-child(3) { text-align: right; }
 
-.button               { background-color: #eee; color: #333; border: 1px solid #aaa; border-radius: 0.7em; padding: 0.3em; display: inline-block; text-align: center; }
+.form DIV                 { height: 3em; margin: 0.2em 0; }
+.form DIV LABEL           { display: inline-block; text-align: right; width: 30%; }
+.form SPAN                { display: block; margin-left: 31%; }
+.form INPUT, .form SELECT { width: 50%; }
+.form .primary            { float: right; width: 35%; }
+
+.button               { background-color: #eee; color: #333; border: 1px solid #aaa; border-radius: 0.7em; padding: 0.3em; display: inline-block; font-size: 1em; text-align: center; }
 .button:HOVER         { background-color: #fff; }
+.button:DISABLED      { opacity: 0.5; }
 .button.primary       { background-color: #069; color: #fff; border: 1px solid #047; }
 .button.primary:HOVER { background-color: #08b; }
+.button.cancel        { background-color: transparent; color: #81c6dd; border-color: transparent; text-decoration: underline; }
+.button.cancel:HOVER  { background-color: transparent; }
 
 .capitalized { text-transform: capitalize; }
 .error       { color: #e48743; font-style: italic; }
