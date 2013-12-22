@@ -31,11 +31,6 @@ A    { text-decoration: none; }
 .list TR TD              { text-align: center; padding: 0.2em 1em; }
 .list TR TD:nth-child(3) { text-align: right; }
 .list SPAN               { color: #fff; display: inline-block; width: 1.5em; border-radius: 0.3em; }
-.list SPAN.blue          { background-color: #3276b1; }
-.list SPAN.green         { background-color: #5cb85c; }
-.list SPAN.orange        { background-color: #f0ad4e; }
-.list SPAN.red           { background-color: #d9534f; }
-.list SPAN.light-blue    { background-color: #66ccff; }
 
 .form DIV                 { height: 3em; margin: 0.2em 0; }
 .form DIV LABEL           { display: inline-block; text-align: right; width: 30%; }
