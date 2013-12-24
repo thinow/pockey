@@ -23,6 +23,7 @@ A    { text-decoration: none; }
 .menu DIV              { display: inline-block; }
 .menu DIV:nth-child(1) { width: 60%; font-size: 3em; color: #81c6dd; font-weight: bold; text-align: center; white-space: nowrap; }
 .menu DIV:nth-child(2) { width: 36%; }
+.menu DIV.negative     { color: #e48743; }
 .menu .button          { width: 100%; margin: 0.1em 0em; }
 
 .list                    { font-size: 1.5em; color: #333; border-collapse: collapse; }
