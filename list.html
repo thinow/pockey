@@ -1,5 +1,5 @@
 <div class="menu content">
-	<div>{{ computeTotal() | signedCurrency }}</div>
+	<div ng-class="{negative : computeTotal() < 0}">{{ computeTotal() | signedCurrency }}</div>
 	<div>
 		<a href="#/" ng-click="startNextMonth()" class="button">
 			<i class="fa fa-forward"></i> Mois suivant
