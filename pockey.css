@@ -26,7 +26,7 @@ A    { text-decoration: none; }
 .menu DIV.negative     { color: #e48743; }
 .menu .button          { width: 100%; margin: 0.1em 0em; }
 
-.list                    { font-size: 1.5em; color: #333; border-collapse: collapse; }
+.list                    { font-size: 1.5em; color: #333; border-collapse: collapse; white-space: nowrap; }
 .list TR                 { background-color: #eafae3; }
 .list TR.even            { background-color: #e1f2da; }
 .list TR TD              { text-align: center; padding: 0.2em 1em; }
