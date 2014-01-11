@@ -73,14 +73,19 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.config(function($routeProvider) {
 		$routeProvider
-			.when('/',			{ controller : 'ListController',	templateUrl : 'list.html' })
-			.when('/add-entry',	{ controller : 'AddController',		templateUrl : 'detail.html' })
+			.when('/',						{ controller : 'HomeController',	templateUrl : 'home.html' })
+			.when('/expenses',				{ controller : 'ListController',	templateUrl : 'list.html' })
+			.when('/expenses/add-entry',	{ controller : 'AddController',		templateUrl : 'detail.html' })
 			.otherwise({ redirectTo : '/' });
 	})
 
 	.controller('HeaderController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
 
 		RemoteService.inject($scope, 'month');
+
+	}])
+
+	.controller('HomeController', ['$scope', function ($scope) {
 
 	}])
 
@@ -121,7 +126,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 		$scope.save = function() {
 			RemoteService.addExpense($scope.expense);
-			$location.path('/');
+			$location.path('/expenses');
 		};
 
 	}]);
