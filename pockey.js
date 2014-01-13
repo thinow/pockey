@@ -80,7 +80,7 @@ angular.module('Pockey', ['firebase'])
 
 	}])
 
-	.controller('ListController', ['$scope', '$window', 'RemoteService', 'DateService', function ($scope, $window, RemoteService, DateService) {
+	.controller('ListController', ['$scope', '$filter', '$window', 'RemoteService', 'DateService', function ($scope, $filter, $window, RemoteService, DateService) {
 
 		RemoteService.inject($scope, 'budget');
 		RemoteService.inject($scope, 'month');
@@ -88,7 +88,7 @@ angular.module('Pockey', ['firebase'])
 		
 		$scope.computeTotal = function() {
 			var allExpensesCost = 0;
-			angular.forEach($scope.expenses, function(expense) {
+			angular.forEach($filter('asArray')($scope.expenses), function(expense) {
 				allExpensesCost += expense.cost;
 			});
 	
