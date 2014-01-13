@@ -11,7 +11,7 @@
 </div>
 <table class="list content">
 	<tbody>
-		<tr ng-repeat="expense in expenses | orderBy:'date':true" ng-class-even="'even'">
+		<tr ng-repeat="expense in expenses | asArray | orderBy:'date':true" ng-class-even="'even'">
 			<td>
 				<span title="{{expense.category.text}}" style="background-color: #{{expense.category.color}}">
 					<i class="fa fa-{{expense.category.icon}}"></i>
