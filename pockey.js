@@ -1,4 +1,4 @@
-angular.module('Pockey', ['firebase'])
+angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.filter('signedCurrency', function($window, $filter) {
 		return function(input) {
