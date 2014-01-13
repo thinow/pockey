@@ -27,6 +27,10 @@ angular.module('Pockey', ['firebase'])
 				this.getNode(property).$bind(parent, property);
 			},
 
+			addExpense : function(expense) {
+				this.getNode('expenses').$add(expense);
+			},
+
 			changeRemoteMonth : function(month) {
 				var formattedMonth = DateService.format(month);
 				this.getNode('month').$set(formattedMonth);
@@ -116,7 +120,7 @@ angular.module('Pockey', ['firebase'])
 		};
 
 		$scope.save = function() {
-			RemoteService.getNode('expenses').$add($scope.expense);
+			RemoteService.addExpense($scope.expense);
 			$location.path('/');
 		};
 
