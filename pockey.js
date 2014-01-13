@@ -9,6 +9,16 @@ angular.module('Pockey', ['firebase'])
 		};
 	})
 
+	.filter('asArray', function($filter) {
+		return function(input) {
+			if (angular.isUndefined(input)) {
+				return input;
+			} else {
+				return $filter('orderByPriority')(input);
+			}
+		};
+	})
+
 	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
 
 	.factory('RemoteService', function(REMOTE_SERVER, $firebase, DateService) {

@@ -11,7 +11,7 @@
 	<div ng-class="{error: form.category.$invalid}">
 		<label>Catégorie</label>
 		<select name="category" ng-model="expense.category"
-			ng-options="category.text for (key, category) in categories | orderBy:'text'"
+			ng-options="category.text for category in categories | asArray | orderBy:'text'"
 			required></select>
 		<span ng-show="form.category.$error.required">Obligatoire</span>
 	</div>
