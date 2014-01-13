@@ -11,54 +11,20 @@ angular.module('Pockey', ['firebase'])
 
 	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
 
-	.factory('RemoteService', function(REMOTE_SERVER, angularFire, angularFireCollection, DateService) {
+	.factory('RemoteService', function(REMOTE_SERVER, $firebase, DateService) {
 		return {
-			injectCollection : function(parent, name) {
-				var collection = angularFireCollection(REMOTE_SERVER + '/' + name);
-				parent[name] = collection;
-			},
-
-			injectNumber : function(parent, property) {
-				this.inject(parent, property, 0);
-			},
-
-			injectString : function(parent, property) {
-				this.inject(parent, property, '');
-			},
-
-			inject : function(parent, property, type) {
-				var node = this.getNode(property);
-				angularFire(node, parent, property, type);
+			inject : function(parent, property) {
+				this.getNode(property).$bind(parent, property);
 			},
 
 			changeRemoteMonth : function(month) {
 				var formattedMonth = DateService.format(month);
-				this.getNode('month').set(formattedMonth);
-				this.getNode('expenses').remove();
+				this.getNode('month').$set(formattedMonth);
+				this.getNode('expenses').$remove();
 			},
 
 			getNode : function(name) {
-				return new Firebase(REMOTE_SERVER + '/' + name);
-			},
-
-			serialize : function(source) {
-				var copy = this.copyObject(source);
-				return this.removeKeys(copy, ['$id', '$index', '$ref']);
-			},
-
-			copyObject : function(source) {
-				var copy = {};
-				angular.forEach(source, function(value, key) {
-					copy[key] = value;
-				});
-				return copy;
-			},
-
-			removeKeys : function(object, keysToRemove) {
-				angular.forEach(keysToRemove, function(keyToRemove) {
-					delete object[keyToRemove];
-				});
-				return object;
+				return $firebase(new Firebase(REMOTE_SERVER + '/' + name));
 			}
 		};
 	})
@@ -100,15 +66,15 @@ angular.module('Pockey', ['firebase'])
 
 	.controller('HeaderController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
 
-		RemoteService.injectString($scope, 'month');
+		RemoteService.inject($scope, 'month');
 
 	}])
 
 	.controller('ListController', ['$scope', '$window', 'RemoteService', 'DateService', function ($scope, $window, RemoteService, DateService) {
 
-		RemoteService.injectNumber($scope, 'budget');
-		RemoteService.injectString($scope, 'month');
-		RemoteService.injectCollection($scope, 'expenses');
+		RemoteService.inject($scope, 'budget');
+		RemoteService.inject($scope, 'month');
+		RemoteService.inject($scope, 'expenses');
 		
 		$scope.computeTotal = function() {
 			var allExpensesCost = 0;
@@ -129,9 +95,8 @@ angular.module('Pockey', ['firebase'])
 
 	.controller('AddController', ['$scope', '$location', 'RemoteService', 'DateService', function ($scope, $location, RemoteService, DateService) {
 
-		RemoteService.injectString($scope, 'month');
-		RemoteService.injectCollection($scope, 'categories');
-		RemoteService.injectCollection($scope, 'expenses');
+		RemoteService.inject($scope, 'month');
+		RemoteService.inject($scope, 'categories');
 
 		$scope.findDaysOfMonth = function() {
 			return {
@@ -141,8 +106,7 @@ angular.module('Pockey', ['firebase'])
 		};
 
 		$scope.save = function() {
-			$scope.expense.category = RemoteService.serialize($scope.expense.category);
-			$scope.expenses.add($scope.expense);
+			RemoteService.getNode('expenses').$add($scope.expense);
 			$location.path('/');
 		};
 
