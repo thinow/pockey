@@ -21,6 +21,20 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
 
+	.factory('AuthentificationService', function(REMOTE_SERVER, $firebaseAuth, $rootScope, $location) {
+		return {
+			initialize : function() {
+				$firebaseAuth(new Firebase(REMOTE_SERVER));
+			},
+
+			redirectOnEvent : function(event, page) {
+				$rootScope.$on('$firebaseAuth:' + event, function(error, user) {
+					$location.path(page);
+				});
+			}
+		};
+	})
+
 	.factory('RemoteService', function(REMOTE_SERVER, $firebase, DateService) {
 		return {
 			inject : function(parent, property) {
@@ -78,6 +92,12 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 			.when('/expenses',				{ controller : 'ListController',	templateUrl : 'list.html' })
 			.when('/expenses/add-entry',	{ controller : 'AddController',		templateUrl : 'detail.html' })
 			.otherwise({ redirectTo : '/' });
+	})
+
+	.run(function(AuthentificationService) {
+		AuthentificationService.initialize();
+		AuthentificationService.redirectOnEvent('login',  '/expenses');
+		AuthentificationService.redirectOnEvent('logout', '/home');
 	})
 
 	.controller('HeaderController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
