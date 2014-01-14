@@ -37,6 +37,10 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 				this.auth.$login(provider, {
 					rememberMe : rememberMe
 				});
+			},
+
+			logout : function() {
+				this.auth.$logout();
 			}
 		};
 	})
@@ -122,7 +126,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 		};
 	}])
 
-	.controller('ListController', ['$scope', '$filter', '$window', 'RemoteService', 'DateService', function ($scope, $filter, $window, RemoteService, DateService) {
+	.controller('ListController', ['$scope', '$filter', '$window', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $filter, $window, RemoteService, DateService, AuthentificationService) {
 
 		RemoteService.inject($scope, 'budget');
 		RemoteService.inject($scope, 'month');
@@ -142,6 +146,10 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 				var nextMonth = DateService.findNextMonth($scope.month);
 				RemoteService.changeRemoteMonth(nextMonth);
 			}
+		};
+
+		$scope.logout = function() {
+			AuthentificationService.logout();
 		};
 	}])
 
