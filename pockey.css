@@ -20,6 +20,8 @@ A    { text-decoration: none; }
 .body    { margin-top: 0.5em; }
 .content { width: 95%; margin: 1.5em auto; }
 
+.loading { text-align: center; color: #81c6dd; font-weight: bold; }
+
 .home > *         { display: block; margin: 0.8em auto; }
 .home .button     { padding: 0.25em 0.5em; }
 .home SPAN        { display: inline-block; font-size: 1.25em; min-width: 13em; text-align: left; margin-left: 0.4em; }
