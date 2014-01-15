@@ -29,6 +29,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 			redirectOnEvent : function(event, page) {
 				$rootScope.$on('$firebaseAuth:' + event, function(error, user) {
+					$rootScope.user = user;
 					$location.path(page);
 				});
 			},
@@ -41,28 +42,45 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 			logout : function() {
 				this.auth.$logout();
+			},
+
+			getUserUid : function() {
+				return angular.isUndefined($rootScope.user) ? undefined : $rootScope.user.uid;
 			}
 		};
 	})
 
-	.factory('RemoteService', function(REMOTE_SERVER, $firebase, DateService) {
+	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate) {
 		return {
-			inject : function(parent, property) {
-				this.getNode(property).$bind(parent, property);
+			inject : function(scope, link) {
+				var name = this.findNodeName(link);
+				this.getNode(link).$bind(scope, name);
+			},
+
+			findNodeName : function(link) {
+				var position = link.lastIndexOf('/') + 1;
+				return link.substring(position);
 			},
 
 			addExpense : function(expense) {
-				this.getNode('expenses').$add(expense);
+				this.getNode('/users/{{user}}/expenses').$add(expense);
 			},
 
 			changeRemoteMonth : function(month) {
 				var formattedMonth = DateService.format(month);
-				this.getNode('month').$set(formattedMonth);
-				this.getNode('expenses').$remove();
+				this.getNode('/users/{{user}}/month').$set(formattedMonth);
+				this.getNode('/users/{{user}}/expenses').$remove();
 			},
 
-			getNode : function(name) {
-				return $firebase(new Firebase(REMOTE_SERVER + '/' + name));
+			getNode : function(pattern) {
+				var link = this.buildLink(pattern);
+				return $firebase(new Firebase(REMOTE_SERVER + link));
+			},
+
+			buildLink : function(pattern) {
+				return $interpolate(pattern)({
+					user : AuthentificationService.getUserUid()
+				});
 			}
 		};
 	})
@@ -112,7 +130,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.controller('HeaderController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
 
-		RemoteService.inject($scope, 'month');
+		RemoteService.inject($scope, '/users/{{user}}/month');
 
 	}])
 
@@ -124,10 +142,10 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.controller('ListController', ['$scope', '$filter', '$window', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $filter, $window, RemoteService, DateService, AuthentificationService) {
 
-		RemoteService.inject($scope, 'budget');
-		RemoteService.inject($scope, 'month');
-		RemoteService.inject($scope, 'expenses');
-		
+		RemoteService.inject($scope, '/users/{{user}}/budget');
+		RemoteService.inject($scope, '/users/{{user}}/month');
+		RemoteService.inject($scope, '/users/{{user}}/expenses');
+
 		$scope.computeTotal = function() {
 			var allExpensesCost = 0;
 			angular.forEach($filter('asArray')($scope.expenses), function(expense) {
@@ -151,8 +169,8 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.controller('AddController', ['$scope', '$location', 'RemoteService', 'DateService', function ($scope, $location, RemoteService, DateService) {
 
-		RemoteService.inject($scope, 'month');
-		RemoteService.inject($scope, 'categories');
+		RemoteService.inject($scope, '/users/{{user}}/month');
+		RemoteService.inject($scope, '/categories');
 
 		$scope.findDaysOfMonth = function() {
 			return {
