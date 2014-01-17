@@ -23,14 +23,21 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.factory('AuthentificationService', function(REMOTE_SERVER, $firebaseAuth, $rootScope, $location) {
 		return {
-			initialize : function() {
+			initialize : function(redirections) {
 				this.auth = $firebaseAuth(new Firebase(REMOTE_SERVER));
+
+				this.register('login',  function(user) { $rootScope.user = user; });
+				this.register('logout', function(user) { $rootScope.user = null; });
+
+				var self = this;
+				angular.forEach(redirections, function(redirection) {
+					self.register(redirection.onEvent, function() { $location.path(redirection.redirectTo); });
+				});
 			},
 
-			redirectOnEvent : function(event, page) {
+			register : function(event, callback) {
 				$rootScope.$on('$firebaseAuth:' + event, function(error, user) {
-					$rootScope.user = user;
-					$location.path(page);
+					callback(user);
 				});
 			},
 
@@ -123,9 +130,10 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 	})
 
 	.run(function(AuthentificationService) {
-		AuthentificationService.initialize();
-		AuthentificationService.redirectOnEvent('login',  '/expenses');
-		AuthentificationService.redirectOnEvent('logout', '/home');
+		AuthentificationService.initialize([
+			{ onEvent : 'login',  redirectTo : '/expenses' },
+			{ onEvent : 'logout', redirectTo : '/home' }
+		]);
 	})
 
 	.controller('HeaderController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
