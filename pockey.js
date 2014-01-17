@@ -52,7 +52,11 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 			},
 
 			getUserUid : function() {
-				return angular.isUndefined($rootScope.user) ? undefined : $rootScope.user.uid;
+				return this.isUserLogged() ? $rootScope.user.uid : undefined;
+			},
+
+			isUserLogged : function() {
+				return $rootScope.user != null && angular.isDefined($rootScope.user);
 			}
 		};
 	})
@@ -72,10 +76,12 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 			inject : function(scope, link) {
 				var self = this;
-
 				var name = this.findNodeName(link);
+
 				AuthentificationService.register('login',  function() { self.bind(scope, link, name); });
 				AuthentificationService.register('logout', function() { self.fields.get(scope, name).unbind(); });
+
+				if (AuthentificationService.isUserLogged()) self.bind(scope, link, name);
 			},
 
 			findNodeName : function(link) {
@@ -158,9 +164,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 	})
 
 	.controller('HeaderController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
-
 		RemoteService.inject($scope, '/users/{{user}}/month');
-
 	}])
 
 	.controller('HomeController', ['$scope', 'AuthentificationService', function ($scope, AuthentificationService) {
