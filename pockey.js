@@ -36,7 +36,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 			},
 
 			register : function(event, callback) {
-				$rootScope.$on('$firebaseAuth:' + event, function(error, user) {
+				$rootScope.$on('$firebaseAuth:' + event, function(e, user) {
 					callback(user);
 				});
 			},
