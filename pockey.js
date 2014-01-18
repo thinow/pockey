@@ -82,7 +82,8 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 				var node = this.getNode(data.link);
 
 				if (angular.isDefined(data.default)) {
-					this.intercept(node, function() { node.$set(data.default); });
+					var newValue = angular.isDate(data.default) ? DateService.format(data.default) : data.default;
+					this.intercept(node, function() { node.$set(newValue); });
 				}
 				node.$bind(scope, data.name);
 			},
@@ -125,6 +126,11 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 			format : function(date) {
 				return $filter('date')(date, 'yyyy-MM-dd');
+			},
+
+			findCurrentMonth : function() {
+				var today = new Date();
+				return new Date(today.getFullYear(), today.getMonth(), 1);
 			},
 
 			findFirstDayOfMonth : function(string) {
@@ -174,7 +180,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 	.controller('ListController', ['$scope', '$filter', '$window', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $filter, $window, RemoteService, DateService, AuthentificationService) {
 
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget', default : 100 });
-		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : '2014-01-01' });
+		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : DateService.findCurrentMonth() });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
 
 		$scope.computeTotal = function() {
