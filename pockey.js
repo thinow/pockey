@@ -79,7 +79,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 				var name = this.findNodeName(link);
 
 				AuthentificationService.register('login',  function() { self.bind(scope, link, name); });
-				AuthentificationService.register('logout', function() { self.fields.get(scope, name).unbind(); });
+				AuthentificationService.register('logout', function() { self.fields.get(scope, name).unbind(); delete scope[name]; });
 
 				if (AuthentificationService.isUserLogged()) self.bind(scope, link, name);
 			},
