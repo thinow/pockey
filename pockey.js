@@ -63,23 +63,23 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate) {
 		return {
-			inject : function(scope, link) {
+			inject : function(scope, data) {
+				data.name = this.findNodeName(data);
+
 				var self = this;
-				var name = this.findNodeName(link);
+				AuthentificationService.register('login',  function() { self.bind(scope, data); });
+				AuthentificationService.register('logout', function() { delete scope[data.name]; });
 
-				AuthentificationService.register('login',  function() { self.bind(scope, link, name); });
-				AuthentificationService.register('logout', function() { delete scope[name]; });
-
-				if (AuthentificationService.isUserLogged()) self.bind(scope, link, name);
+				if (AuthentificationService.isUserLogged()) self.bind(scope, data);
 			},
 
-			findNodeName : function(link) {
-				var position = link.lastIndexOf('/') + 1;
-				return link.substring(position);
+			findNodeName : function(data) {
+				var position = data.link.lastIndexOf('/') + 1;
+				return data.link.substring(position);
 			},
 
-			bind : function(scope, link, name) {
-				this.getNode(link).$bind(scope, name).then(function(unbind) {
+			bind : function(scope, data) {
+				this.getNode(data.link).$bind(scope, data.name).then(function(unbind) {
 				});
 			},
 
@@ -151,7 +151,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 	})
 
 	.controller('HeaderController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
-		RemoteService.inject($scope, '/users/{{user}}/month');
+		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 	}])
 
 	.controller('HomeController', ['$scope', 'AuthentificationService', function ($scope, AuthentificationService) {
@@ -162,9 +162,9 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.controller('ListController', ['$scope', '$filter', '$window', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $filter, $window, RemoteService, DateService, AuthentificationService) {
 
-		RemoteService.inject($scope, '/users/{{user}}/budget');
-		RemoteService.inject($scope, '/users/{{user}}/month');
-		RemoteService.inject($scope, '/users/{{user}}/expenses');
+		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
+		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
+		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
 
 		$scope.computeTotal = function() {
 			var allExpensesCost = 0;
@@ -189,8 +189,8 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.controller('AddController', ['$scope', '$location', 'RemoteService', 'DateService', function ($scope, $location, RemoteService, DateService) {
 
-		RemoteService.inject($scope, '/users/{{user}}/month');
-		RemoteService.inject($scope, '/categories');
+		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
+		RemoteService.inject($scope, { link : '/categories' });
 
 		$scope.findDaysOfMonth = function() {
 			return {
