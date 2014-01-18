@@ -9,8 +9,8 @@ A    { text-decoration: none; }
 .button:DISABLED      { opacity: 0.5; }
 .button.primary       { background: linear-gradient(#08b, #069); color: #fff; border: 1px solid #047; }
 .button.primary:HOVER { background: #08b; }
-.button.cancel        { background-color: transparent; color: #81c6dd; border-color: transparent; text-decoration: underline; }
-.button.cancel:HOVER  { background-color: transparent; }
+.button.cancel        { background: transparent; color: #81c6dd; border-color: transparent; text-decoration: underline; }
+.button.cancel:HOVER  { background: transparent; }
 
 .header                   { background-color: #90ca77; color: #ffffff; height: 4em; }
 .header SPAN              { position: absolute; }
