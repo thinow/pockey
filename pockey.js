@@ -63,23 +63,12 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate) {
 		return {
-			fields : {
-				get : function(scope, name) {
-					var key = scope.$id + '/' + name;
-
-					if (angular.isUndefined(this[key])) {
-						this[key] = { unbind : function() {} };
-					}
-					return this[key];
-				}
-			},
-
 			inject : function(scope, link) {
 				var self = this;
 				var name = this.findNodeName(link);
 
 				AuthentificationService.register('login',  function() { self.bind(scope, link, name); });
-				AuthentificationService.register('logout', function() { self.fields.get(scope, name).unbind(); delete scope[name]; });
+				AuthentificationService.register('logout', function() { delete scope[name]; });
 
 				if (AuthentificationService.isUserLogged()) self.bind(scope, link, name);
 			},
@@ -90,9 +79,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 			},
 
 			bind : function(scope, link, name) {
-				var self = this;
 				this.getNode(link).$bind(scope, name).then(function(unbind) {
-					self.fields.get(scope, name).unbind = unbind;
 				});
 			},
 
