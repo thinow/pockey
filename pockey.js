@@ -61,7 +61,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 		};
 	})
 
-	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate) {
+	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout) {
 		return {
 			inject : function(scope, data) {
 				data.name = this.findNodeName(data);
@@ -79,7 +79,18 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 			},
 
 			bind : function(scope, data) {
-				this.getNode(data.link).$bind(scope, data.name).then(function(unbind) {
+				var node = this.getNode(data.link);
+
+				if (angular.isDefined(data.default)) {
+					this.intercept(node, function() { node.$set(data.default); });
+				}
+				node.$bind(scope, data.name);
+			},
+
+			intercept : function(node, callback) {
+				node.$on('loaded', function(value) {
+					// When value is empty, the node does not exist on server
+					if (value == '') $timeout(callback);
 				});
 			},
 
@@ -162,8 +173,8 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.controller('ListController', ['$scope', '$filter', '$window', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $filter, $window, RemoteService, DateService, AuthentificationService) {
 
-		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
-		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
+		RemoteService.inject($scope, { link : '/users/{{user}}/budget', default : 100 });
+		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : '2014-01-01' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
 
 		$scope.computeTotal = function() {
