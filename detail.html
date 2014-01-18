@@ -11,7 +11,7 @@
 	<div ng-class="{error: form.category.$invalid}">
 		<label>Catégorie</label>
 		<select name="category" ng-model="expense.category"
-			ng-options="category.text for category in categories | orderBy:'text'"
+			ng-options="category.text for category in categories | asArray | orderBy:'text'"
 			required></select>
 		<span ng-show="form.category.$error.required">Obligatoire</span>
 	</div>
@@ -26,7 +26,7 @@
 		<span ng-show="form.date.$error.pattern">Mauvais format (aaaa-mm-jj)</span>
 	</div>
 	
-	<a href="#/" class="button cancel">
+	<a href="#/expenses" class="button cancel">
 		<i class="fa fa-angle-double-left"></i> Annuler
 	</a>
 	<button ng-click="save()" ng-disabled="!form.$valid" class="button primary">

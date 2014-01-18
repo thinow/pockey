@@ -4,13 +4,13 @@ A    { text-decoration: none; }
 .capitalized { text-transform: capitalize; }
 .error       { color: #e48743; font-style: italic; }
 
-.button               { background-color: #eee; color: #333; border: 1px solid #aaa; border-radius: 0.7em; padding: 0.3em; display: inline-block; font-size: 1em; text-align: center; }
-.button:HOVER         { background-color: #fff; }
+.button               { background: linear-gradient(#fff, #ccc); color: #333; border: 1px solid #aaa; border-radius: 0.7em; padding: 0.3em; display: inline-block; font-size: 1em; text-align: center; }
+.button:HOVER         { background: #fff; }
 .button:DISABLED      { opacity: 0.5; }
-.button.primary       { background-color: #069; color: #fff; border: 1px solid #047; }
-.button.primary:HOVER { background-color: #08b; }
-.button.cancel        { background-color: transparent; color: #81c6dd; border-color: transparent; text-decoration: underline; }
-.button.cancel:HOVER  { background-color: transparent; }
+.button.primary       { background: linear-gradient(#08b, #069); color: #fff; border: 1px solid #047; }
+.button.primary:HOVER { background: #08b; }
+.button.cancel        { background: transparent; color: #81c6dd; border-color: transparent; text-decoration: underline; }
+.button.cancel:HOVER  { background: transparent; }
 
 .header                   { background-color: #90ca77; color: #ffffff; height: 4em; }
 .header SPAN              { position: absolute; }
@@ -19,6 +19,13 @@ A    { text-decoration: none; }
 
 .body    { margin-top: 0.5em; }
 .content { width: 95%; margin: 1.5em auto; }
+
+.loading { text-align: center; color: #81c6dd; font-weight: bold; }
+
+.home > *         { display: block; margin: 0.8em auto; }
+.home .button     { padding: 0.25em 0.5em; }
+.home SPAN        { display: inline-block; font-size: 1.25em; min-width: 13em; text-align: left; margin-left: 0.4em; }
+.home .rememberMe { color: #333; text-align: center; margin-top: 2em; }
 
 .menu DIV              { display: inline-block; }
 .menu DIV:nth-child(1) { width: 60%; font-size: 3em; color: #81c6dd; font-weight: bold; text-align: center; white-space: nowrap; }

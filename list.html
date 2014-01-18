@@ -1,17 +1,17 @@
 <div class="menu content">
 	<div ng-class="{negative : computeTotal() < 0}">{{ computeTotal() | signedCurrency }}</div>
 	<div>
-		<a href="#/" ng-click="startNextMonth()" class="button">
+		<a href="#/expenses" ng-click="startNextMonth()" class="button">
 			<i class="fa fa-forward"></i> Mois suivant
 		</a>
-		<a href="#/add-entry" class="button primary">
+		<a href="#/expenses/add-entry" class="button primary">
 			<i class="fa fa-plus-circle"></i> Ajouter
 		</a>
 	</div>
 </div>
 <table class="list content">
 	<tbody>
-		<tr ng-repeat="expense in expenses | orderBy:'date':true" ng-class-even="'even'">
+		<tr ng-repeat="expense in expenses | asArray | orderBy:'date':true" ng-class-even="'even'">
 			<td>
 				<span title="{{expense.category.text}}" style="background-color: #{{expense.category.color}}">
 					<i class="fa fa-{{expense.category.icon}}"></i>
@@ -22,3 +22,6 @@
 		</tr>
 	</tbody>
 </table>
+<button ng-click="logout()" class="button cancel" style="text-align: center; width: 100%;">
+	Déconnexion
+</button>
