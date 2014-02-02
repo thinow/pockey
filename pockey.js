@@ -99,13 +99,12 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 				this.getNode('/users/{{user}}/expenses').$add(expense);
 			},
 
-			computeTotal : function(budget, expenses) {
-				var allExpensesCost = 0;
+			sumExpenses : function(expenses) {
+				var sum = 0;
 				angular.forEach($filter('asArray')(expenses), function(expense) {
-					allExpensesCost += expense.cost;
+					sum += expense.cost;
 				});
-
-				return budget - allExpensesCost;
+				return sum;
 			},
 
 			changeRemoteMonth : function(month) {
@@ -193,8 +192,8 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : DateService.findCurrentMonth() });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
 
-		$scope.total = function() {
-			return RemoteService.computeTotal($scope.budget, $scope.expenses);
+		$scope.computeRemainder = function() {
+			return $scope.budget - RemoteService.sumExpenses($scope.expenses);
 		};
 
 		$scope.startNextMonth = function() {
