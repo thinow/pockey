@@ -156,6 +156,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 			.when('/',						{ templateUrl : 'loading.html' })
 			.when('/home',					{ controller : 'HomeController',	templateUrl : 'home.html' })
 			.when('/expenses',				{ controller : 'ListController',	templateUrl : 'list.html' })
+			.when('/expenses/summary',		{ controller : 'SummaryController',	templateUrl : 'summary.html' })
 			.when('/expenses/add-entry',	{ controller : 'AddController',		templateUrl : 'detail.html' })
 			.otherwise({ redirectTo : '/' });
 	})
