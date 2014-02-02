@@ -1,4 +1,7 @@
 <div class="content">
-	Résumé
+	<h2>Résumé</h2>
+	<form>
+		<input type="number" ng-model="budget"> - {{ getExpensesSum() }} = {{ budget - getExpensesSum() | signedCurrency }}
+	</form>
 	<a href="#/expenses" class="button cancel">Retour</a>
 </div>

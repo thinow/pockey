@@ -208,6 +208,15 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 		};
 	}])
 
+	.controller('SummaryController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
+		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
+		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
+
+		$scope.getExpensesSum = function() {
+			return RemoteService.sumExpenses($scope.expenses);
+		};
+	}])
+
 	.controller('AddController', ['$scope', '$location', 'RemoteService', 'DateService', function ($scope, $location, RemoteService, DateService) {
 
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
