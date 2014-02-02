@@ -61,7 +61,7 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 		};
 	})
 
-	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout) {
+	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout, $filter) {
 		return {
 			inject : function(scope, data) {
 				data.name = this.findNodeName(data);
@@ -97,6 +97,15 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 			addExpense : function(expense) {
 				this.getNode('/users/{{user}}/expenses').$add(expense);
+			},
+
+			computeTotal : function(budget, expenses) {
+				var allExpensesCost = 0;
+				angular.forEach($filter('asArray')(expenses), function(expense) {
+					allExpensesCost += expense.cost;
+				});
+
+				return budget - allExpensesCost;
 			},
 
 			changeRemoteMonth : function(month) {
@@ -178,19 +187,14 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 		};
 	}])
 
-	.controller('ListController', ['$scope', '$filter', '$window', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $filter, $window, RemoteService, DateService, AuthentificationService) {
+	.controller('ListController', ['$scope', '$window', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $window, RemoteService, DateService, AuthentificationService) {
 
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget', default : 100 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : DateService.findCurrentMonth() });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
 
-		$scope.computeTotal = function() {
-			var allExpensesCost = 0;
-			angular.forEach($filter('asArray')($scope.expenses), function(expense) {
-				allExpensesCost += expense.cost;
-			});
-	
-			return $scope.budget - allExpensesCost;
+		$scope.total = function() {
+			return RemoteService.computeTotal($scope.budget, $scope.expenses);
 		};
 
 		$scope.startNextMonth = function() {
