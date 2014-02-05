@@ -3,6 +3,7 @@ A    { text-decoration: none; }
 
 .capitalized { text-transform: capitalize; }
 .error       { color: #e48743; font-style: italic; }
+.center      { text-align: center; width: 100%; }
 
 .button               { background: linear-gradient(#fff, #ccc); color: #333; border: 1px solid #aaa; border-radius: 0.7em; padding: 0.3em; display: inline-block; font-size: 1em; text-align: center; }
 .button:HOVER         { background: #fff; }
