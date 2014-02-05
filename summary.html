@@ -1,5 +1,5 @@
 <form name="summary" class="content summary">
-	<h2>Résumé</h2>
+	<h2 ng-hide="!month">Résumé sur {{ month | date:'MMMM yyyy' }}</h2>
 	<div>
 		<p>
 			<span>Budget :</span>
