@@ -161,11 +161,11 @@ angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.config(function($routeProvider) {
 		$routeProvider
-			.when('/',						{ templateUrl : 'loading.html' })
-			.when('/home',					{ controller : 'HomeController',	templateUrl : 'home.html' })
-			.when('/expenses',				{ controller : 'ListController',	templateUrl : 'list.html' })
-			.when('/expenses/summary',		{ controller : 'SummaryController',	templateUrl : 'summary.html' })
-			.when('/expenses/add-entry',	{ controller : 'AddController',		templateUrl : 'detail.html' })
+			.when('/',						{ templateUrl : 'views/loading.html' })
+			.when('/home',					{ controller : 'HomeController',	templateUrl : 'views/home.html' })
+			.when('/expenses',				{ controller : 'ListController',	templateUrl : 'views/list.html' })
+			.when('/expenses/summary',		{ controller : 'SummaryController',	templateUrl : 'views/summary.html' })
+			.when('/expenses/add-entry',	{ controller : 'AddController',		templateUrl : 'views/detail.html' })
 			.otherwise({ redirectTo : '/' });
 	})
 
