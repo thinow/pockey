@@ -1,5 +1,5 @@
 <div class="menu content">
-	<div ng-class="{negative : computeTotal() < 0}">{{ computeTotal() | signedCurrency }}</div>
+	<a href="#/expenses/summary" ng-class="{negative : computeRemainder() < 0}">{{ computeRemainder() | signedCurrency }}</a>
 	<div>
 		<a href="#/expenses" ng-click="startNextMonth()" class="button">
 			<i class="fa fa-forward"></i> Mois suivant
@@ -22,6 +22,6 @@
 		</tr>
 	</tbody>
 </table>
-<button ng-click="logout()" class="button cancel" style="text-align: center; width: 100%;">
+<button ng-click="logout()" class="button cancel center">
 	Déconnexion
 </button>

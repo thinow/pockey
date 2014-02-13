@@ -1,0 +1,19 @@
+<form name="summary" class="content summary">
+	<h2 ng-hide="!month">Résumé sur {{ month | date:'MMMM yyyy' }}</h2>
+	<div>
+		<p>
+			<span>Budget :</span>
+			<input type="number" ng-model="budget">
+		</p>
+		<p>
+			<span>Dépenses :</span>
+			<span>{{ -getExpensesSum() | signedCurrency }}</span>
+		</p>
+		<hr>
+		<p>
+			<span>Reste :</span>
+			<span>{{ budget - getExpensesSum() | signedCurrency }}</span>
+		</p>
+	</div>
+	<a href="#/expenses" class="button cancel center">Retour</a>
+</form>
