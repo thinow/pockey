@@ -23,10 +23,13 @@ A    { text-decoration: none; }
 
 .loading { text-align: center; color: #81c6dd; font-weight: bold; }
 
-.home > *         { display: block; margin: 0.8em auto; }
-.home .button     { background: linear-gradient(#fff, #e4e4e4); padding: 0.25em 0.5em; }
-.home SPAN        { display: inline-block; font-size: 1.25em; min-width: 13em; text-align: left; margin-left: 0.4em; }
-.home .rememberMe { color: #333; text-align: center; margin-top: 2em; }
+.home                    { text-align: center; }
+.home .message           { margin-top: 3em; }
+.home .provider          { display: inline-block; font-size: 1.25em; margin: 3em 0.9em; cursor: pointer; }
+.home .provider.facebook { color: #3b5998; }
+.home .provider.twitter  { color: #4099ff; }
+.home .provider.github   { color: #333333; }
+.home .rememberMe        { color: #333; margin-top: 2em; }
 
 /* Menu: boxes positions */
 .menu                { margin-bottom: 3em; }
