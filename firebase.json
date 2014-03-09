@@ -1,0 +1,5 @@
+{
+  "firebase": "pockey-dev",
+  "public": "app",
+  "rules": "config/security-rules.js"
+}
