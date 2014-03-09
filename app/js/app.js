@@ -9,7 +9,7 @@ angular.module('Pockey', [
 		'Pockey.service.remote'
 	])
 
-	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
+	.constant('REMOTE_SERVER', 'https://pockey.firebaseio.com')
 
 	.config(function($routeProvider) {
 		$routeProvider
