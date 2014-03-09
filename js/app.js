@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('Pockey', ['ngRoute', 'firebase'])
 
 	.filter('signedCurrency', function($window, $filter) {
