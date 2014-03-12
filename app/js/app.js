@@ -15,6 +15,7 @@ angular.module('Pockey', [
 		$routeProvider
 			.when('/',						{ templateUrl : 'views/loading.html' })
 			.when('/home',					{ controller : 'HomeController',	templateUrl : 'views/home.html' })
+			.when('/menu',					{ controller : undefined,			templateUrl : 'views/menu.html' })
 			.when('/expenses',				{ controller : 'ListController',	templateUrl : 'views/list.html' })
 			.when('/expenses/summary',		{ controller : 'SummaryController',	templateUrl : 'views/summary.html' })
 			.when('/expenses/add-entry',	{ controller : 'AddController',		templateUrl : 'views/detail.html' })
@@ -23,7 +24,7 @@ angular.module('Pockey', [
 
 	.run(function(AuthentificationService) {
 		AuthentificationService.initialize([
-			{ onEvent : 'login',  redirectTo : '/expenses' },
+			{ onEvent : 'login',  redirectTo : '/menu' },
 			{ onEvent : 'logout', redirectTo : '/home' }
 		]);
 	})
