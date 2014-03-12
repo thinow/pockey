@@ -13,12 +13,12 @@ angular.module('Pockey', [
 
 	.config(function($routeProvider) {
 		$routeProvider
-			.when('/',						{ templateUrl : 'views/loading.html' })
-			.when('/home',					{ controller : 'HomeController',	templateUrl : 'views/home.html' })
-			.when('/menu',					{ controller : undefined,			templateUrl : 'views/menu.html' })
-			.when('/expenses',				{ controller : 'ListController',	templateUrl : 'views/list.html' })
-			.when('/expenses/summary',		{ controller : 'SummaryController',	templateUrl : 'views/summary.html' })
-			.when('/expenses/add-entry',	{ controller : 'AddController',		templateUrl : 'views/detail.html' })
+			.when('/',                      { templateUrl : 'views/loading.html', controller : undefined })
+			.when('/home',                  { templateUrl : 'views/home.html',    controller : 'HomeController' })
+			.when('/menu',                  { templateUrl : 'views/menu.html',    controller : undefined })
+			.when('/expenses',              { templateUrl : 'views/list.html',    controller : 'ListController' })
+			.when('/expenses/summary',      { templateUrl : 'views/summary.html', controller : 'SummaryController' })
+			.when('/expenses/add-entry',    { templateUrl : 'views/detail.html',  controller : 'AddController' })
 			.otherwise({ redirectTo : '/' });
 	})
 
