@@ -1,4 +1,4 @@
-<div class="list-header content">
+<div class="content list-header">
 	<a href="#/expenses/summary" ng-class="{negative : computeRemainder() < 0}">{{ computeRemainder() | signedCurrency }}</a>
 	<div>
 		<a href="#/expenses" ng-click="startNextMonth()" class="button">
@@ -9,7 +9,7 @@
 		</a>
 	</div>
 </div>
-<table class="list content">
+<table class="content list">
 	<tbody>
 		<tr ng-repeat="expense in expenses | asArray | orderBy:'date':true" ng-class-even="'even'">
 			<td>
