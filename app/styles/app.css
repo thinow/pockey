@@ -28,17 +28,20 @@ A    { text-decoration: none; }
 .home SPAN        { display: inline-block; font-size: 1.25em; min-width: 13em; text-align: left; margin-left: 0.4em; }
 .home .rememberMe { color: #333; text-align: center; margin-top: 2em; }
 
+/* Menu: boxes positions */
 .menu                { margin-bottom: 3em; }
-.menu .box           { background-color: #90ca77; color: #fff; display: inline-block; position: relative; vertical-align: top; height: 7em; text-align: center; line-height: 2em; border-radius: 0.4em; }
-.menu .box:HOVER     { cursor: pointer; }
-.menu .box *         { font-size: 2em; }
-.menu .box.warning   { background-color: #e48743; color: #fff; }
+.menu .box           { position: relative; display: inline-block; }
 .menu .box.month     { width: 76.4%; top: 0.5em; left: 1.8%; }
-.menu .box.logout    { width: 18.2%; top: 0.5em; left: 3.6%; text-align: center; }
-.menu .box.logout I  { font-size: 4em; margin-top: 0.4em; }
+.menu .box.logout    { width: 18.2%; top: 0.5em; left: 3.6%; }
 .menu .box.remaining { width: 96.4%; top: 1.0em; left: 1.8%; }
 .menu .box.add       { width: 47.3%; top: 1.5em; left: 1.8%; }
 .menu .box.budget    { width: 47.3%; top: 1.5em; left: 3.6%; }
+/* Specific boxes style */
+.menu .box           { background-color: #90ca77; color: #fff; vertical-align: top; height: 7em; text-align: center; line-height: 2em; border-radius: 0.4em; cursor: pointer; }
+.menu .box *         { font-size: 2em; }
+.menu .box.warning   { background-color: #e48743; color: #fff; }
+.menu .box.logout    { text-align: center; }
+.menu .box.logout I  { font-size: 4em; margin-top: 0.4em; }
 
 .list-header > A          { display: inline-block; width: 60%; font-size: 3em; color: #81c6dd; font-weight: bold; text-align: center; white-space: nowrap; }
 .list-header > A.negative { color: #e48743; }
