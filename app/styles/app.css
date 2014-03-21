@@ -29,11 +29,13 @@ A    { text-decoration: none; }
 .home .rememberMe { color: #333; text-align: center; margin-top: 2em; }
 
 .menu                { margin-bottom: 3em; }
-.menu .box           { background-color: #90ca77; display: inline-block; position: relative; vertical-align: top; height: 7em; cursor: pointer; }
+.menu .box           { background-color: #90ca77; color: #fff; display: inline-block; position: relative; vertical-align: top; height: 7em; text-align: center; line-height: 2em; border-radius: 0.4em; }
+.menu .box:HOVER     { cursor: pointer; }
+.menu .box *         { font-size: 2em; }
 .menu .box.warning   { background-color: #e48743; color: #fff; }
 .menu .box.month     { width: 76.4%; top: 0.5em; left: 1.8%; }
 .menu .box.logout    { width: 18.2%; top: 0.5em; left: 3.6%; text-align: center; }
-.menu .box.logout I  { margin-top: 0.4em; }
+.menu .box.logout I  { font-size: 4em; margin-top: 0.4em; }
 .menu .box.remaining { width: 96.4%; top: 1.0em; left: 1.8%; }
 .menu .box.add       { width: 47.3%; top: 1.5em; left: 1.8%; }
 .menu .box.budget    { width: 47.3%; top: 1.5em; left: 3.6%; }
