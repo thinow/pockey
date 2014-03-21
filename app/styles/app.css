@@ -28,6 +28,14 @@ A    { text-decoration: none; }
 .home SPAN        { display: inline-block; font-size: 1.25em; min-width: 13em; text-align: left; margin-left: 0.4em; }
 .home .rememberMe { color: #333; text-align: center; margin-top: 2em; }
 
+.menu                                     { margin-bottom: 3em; }
+.menu .line DIV                           { background-color: #90ca77; display: inline-block; position: relative; height: 7em; cursor: pointer; }
+.menu .line:nth-child(1) DIV:nth-child(1) { width: 76.4%; top: 0.5em; left: 1.8%; }
+.menu .line:nth-child(1) DIV:nth-child(2) { width: 18.2%; top: 0.5em; left: 3.6%; }
+.menu .line:nth-child(2) DIV:nth-child(1) { width: 96.4%; top: 1.0em; left: 1.8%; }
+.menu .line:nth-child(3) DIV:nth-child(1) { width: 47.3%; top: 1.5em; left: 1.8%; }
+.menu .line:nth-child(3) DIV:nth-child(2) { width: 47.3%; top: 1.5em; left: 3.6%; }
+
 .list-header > A          { display: inline-block; width: 60%; font-size: 3em; color: #81c6dd; font-weight: bold; text-align: center; white-space: nowrap; }
 .list-header > A.negative { color: #e48743; }
 .list-header DIV          { display: inline-block; width: 36%; }
