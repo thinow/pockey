@@ -1,15 +1,8 @@
-<div class="menu content">
-	<a href="#/expenses/summary" ng-class="{negative : computeRemainder() < 0}">{{ computeRemainder() | signedCurrency }}</a>
-	<div>
-		<a href="#/expenses" ng-click="startNextMonth()" class="button">
-			<i class="fa fa-forward"></i> Mois suivant
-		</a>
-		<a href="#/expenses/add-entry" class="button primary">
-			<i class="fa fa-plus-circle"></i> Ajouter
-		</a>
-	</div>
+<div class="content list-header">
+	<div class="remainder" ng-class="{negative : computeRemainder() < 0}">{{ computeRemainder() | signedCurrency }}</div>
+	<a href="#/expenses/add-entry" class="button primary"><i class="fa fa-plus-circle"></i> Nouvelle dépense</a>
 </div>
-<table class="list content">
+<table class="content list">
 	<tbody>
 		<tr ng-repeat="expense in expenses | asArray | orderBy:'date':true" ng-class-even="'even'">
 			<td>
@@ -22,6 +15,4 @@
 		</tr>
 	</tbody>
 </table>
-<button ng-click="logout()" class="button cancel center">
-	Déconnexion
-</button>
+<a href="#/menu" class="button cancel center">Retour</a>
