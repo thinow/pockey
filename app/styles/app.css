@@ -65,6 +65,6 @@ A    { text-decoration: none; }
 .form .primary            { float: right; width: 35%; }
 
 .summary H2    { color: #73a15f; }
-.summary > DIV { width: 50%; margin: 0 auto; }
+.summary > DIV { width: 66%; margin: 0 auto; }
 .summary P *   { display: inline-block; width: 48%; text-align: right; }
 .summary INPUT { font-weight: bold; }
