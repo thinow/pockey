@@ -1,17 +1,15 @@
 <div class="content home">
 
-	<button ng-click="login('facebook')" class="button">
-		<i class="fa fa-facebook-square fa-3x" style="color: #3b5998"></i><span>Utiliser le compte <b>Facebook</b></span>
-	</button>
-	<button ng-click="login('twitter')" class="button">
-		<i class="fa fa-twitter-square fa-3x" style="color: #4099ff"></i><span>Utiliser le compte <b>Twitter</b></span>
-	</button>
-	<button ng-click="login('github')" class="button">
-		<i class="fa fa-github-square fa-3x" style="color: #333333"></i><span>Utiliser le compte <b>GitHub</b></span>
-	</button>
+	<div class="message">Se connecter avec votre compte :</div>
 
-	<div class="rememberMe">
-		<input type="checkbox" ng-model="rememberMe" /> Se souvenir de moi
+	<div ng-click="login('facebook')" class="provider facebook">
+		<i class="fa fa-facebook-square"></i><br /><span>Facebook</span>
+	</div>
+	<div ng-click="login('twitter')" class="provider twitter">
+		<i class="fa fa-twitter-square"></i><br /><span>Twitter</span>
+	</div>
+	<div ng-click="login('github')" class="provider github">
+		<i class="fa fa-github-square"></i><br /><span>GitHub</span>
 	</div>
 
 </div>
