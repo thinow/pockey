@@ -15,7 +15,7 @@ angular.module('Pockey', [
 		$routeProvider
 			.when('/',                      { templateUrl : 'views/loading.html', controller : undefined })
 			.when('/home',                  { templateUrl : 'views/home.html',    controller : 'HomeController' })
-			.when('/menu',                  { templateUrl : 'views/menu.html',    controller : undefined })
+			.when('/menu',                  { templateUrl : 'views/menu.html',    controller : 'MenuController' })
 			.when('/expenses',              { templateUrl : 'views/list.html',    controller : 'ListController' })
 			.when('/expenses/summary',      { templateUrl : 'views/summary.html', controller : 'SummaryController' })
 			.when('/expenses/add-entry',    { templateUrl : 'views/detail.html',  controller : 'AddController' })

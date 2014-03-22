@@ -12,9 +12,19 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('ListController', ['$scope', '$window', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $window, RemoteService, DateService, AuthentificationService) {
+	.controller('MenuController', ['$scope', 'RemoteService', 'DateService', function ($scope, RemoteService, DateService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget', default : 100 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : DateService.findCurrentMonth() });
+		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
+
+		$scope.computeRemainder = function() {
+			return $scope.budget - RemoteService.sumExpenses($scope.expenses);
+		};
+	}])
+
+	.controller('ListController', ['$scope', '$window', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $window, RemoteService, DateService, AuthentificationService) {
+		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
+		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
 
 		$scope.computeRemainder = function() {
