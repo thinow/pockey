@@ -12,7 +12,7 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('MenuController', ['$scope', '$window', 'RemoteService', 'DateService', function ($scope, $window, RemoteService, DateService) {
+	.controller('MenuController', ['$scope', '$window', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $window, RemoteService, DateService, AuthentificationService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget', default : 100 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : DateService.findCurrentMonth() });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
@@ -26,6 +26,10 @@ angular.module('Pockey.controllers', [])
 				var nextMonth = DateService.findNextMonth($scope.month);
 				RemoteService.changeRemoteMonth(nextMonth);
 			}
+		};
+
+		$scope.logout = function() {
+			AuthentificationService.logout();
 		};
 	}])
 
