@@ -47,10 +47,10 @@ A    { text-decoration: none; }
 .menu .box.budget SPAN { margin-top: 0.8em; display: block; }
 .menu .box.add I       { margin-top: 0.8em; }
 
-.list-header > A          { display: inline-block; width: 60%; font-size: 3em; color: #81c6dd; font-weight: bold; text-align: center; white-space: nowrap; }
-.list-header > A.negative { color: #e48743; }
-.list-header DIV          { display: inline-block; width: 36%; }
-.list-header .button      { width: 100%; margin: 0.1em 0em; }
+.list-header .remainder          { display: inline-block; width: 60%; font-size: 3em; color: #81c6dd; font-weight: bold; text-align: center; white-space: nowrap; }
+.list-header .remainder.negative { color: #e48743; }
+.list-header .buttons            { display: inline-block; width: 36%; }
+.list-header .button             { width: 100%; margin: 0.1em 0em; }
 
 .list                    { font-size: 1.5em; color: #333; border-collapse: collapse; white-space: nowrap; }
 .list TR                 { background-color: #eafae3; }

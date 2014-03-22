@@ -1,6 +1,6 @@
 <div class="content list-header">
-	<a href="#/expenses/summary" ng-class="{negative : computeRemainder() < 0}">{{ computeRemainder() | signedCurrency }}</a>
-	<div>
+	<div class="remainder" ng-class="{negative : computeRemainder() < 0}">{{ computeRemainder() | signedCurrency }}</div>
+	<div class="buttons">
 		<a href="#/expenses" ng-click="startNextMonth()" class="button">
 			<i class="fa fa-forward"></i> Mois suivant
 		</a>
