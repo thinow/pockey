@@ -8,7 +8,7 @@ angular.module('Pockey.controllers', [])
 
 	.controller('HomeController', ['$scope', 'AuthentificationService', function ($scope, AuthentificationService) {
 		$scope.login = function(provider) {
-			AuthentificationService.login(provider, $scope.rememberMe);
+			AuthentificationService.login(provider);
 		};
 	}])
 

@@ -22,9 +22,9 @@ angular.module('Pockey.service.authentification', ['firebase'])
 				});
 			},
 
-			login : function(provider, rememberMe) {
+			login : function(provider) {
 				this.auth.$login(provider, {
-					rememberMe : rememberMe
+					rememberMe : true
 				});
 			},
 

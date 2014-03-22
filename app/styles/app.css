@@ -30,7 +30,6 @@ A    { text-decoration: none; }
 .home .provider.facebook { color: #3b5998; }
 .home .provider.twitter  { color: #4099ff; }
 .home .provider.github   { color: #333333; }
-.home .rememberMe        { color: #333; margin-top: 2em; }
 
 /* Menu: boxes positions */
 .menu                { margin-bottom: 3em; }
