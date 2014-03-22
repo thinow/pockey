@@ -39,18 +39,10 @@ angular.module('Pockey.controllers', [])
 
 	.controller('ListController', ['$scope', '$window', 'RemoteService', 'DateService', function ($scope, $window, RemoteService, DateService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
-		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
 
 		$scope.computeRemainder = function() {
 			return $scope.budget - RemoteService.sumExpenses($scope.expenses);
-		};
-
-		$scope.startNextMonth = function() {
-			if ($window.confirm('Passer au mois suivant ?')) {
-				var nextMonth = DateService.findNextMonth($scope.month);
-				RemoteService.changeRemoteMonth(nextMonth);
-			}
 		};
 	}])
 
