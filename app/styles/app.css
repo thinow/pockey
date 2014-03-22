@@ -26,6 +26,7 @@ A    { text-decoration: none; }
 .home                    { text-align: center; }
 .home .message           { margin-top: 3em; }
 .home .provider          { display: inline-block; font-size: 1.25em; margin: 3em 0.9em; cursor: pointer; }
+.home .provider I        { font-size: 3em; }
 .home .provider.facebook { color: #3b5998; }
 .home .provider.twitter  { color: #4099ff; }
 .home .provider.github   { color: #333333; }
