@@ -23,15 +23,36 @@ A    { text-decoration: none; }
 
 .loading { text-align: center; color: #81c6dd; font-weight: bold; }
 
-.home > *         { display: block; margin: 0.8em auto; }
-.home .button     { background: linear-gradient(#fff, #e4e4e4); padding: 0.25em 0.5em; }
-.home SPAN        { display: inline-block; font-size: 1.25em; min-width: 13em; text-align: left; margin-left: 0.4em; }
-.home .rememberMe { color: #333; text-align: center; margin-top: 2em; }
+.home                    { text-align: center; }
+.home .message           { margin-top: 3em; }
+.home .provider          { display: inline-block; font-size: 1.25em; margin: 3em 0.9em; cursor: pointer; }
+.home .provider I        { font-size: 3em; }
+.home .provider.facebook { color: #3b5998; }
+.home .provider.twitter  { color: #4099ff; }
+.home .provider.github   { color: #333333; }
 
-.menu > A          { display: inline-block; width: 60%; font-size: 3em; color: #81c6dd; font-weight: bold; text-align: center; white-space: nowrap; }
-.menu > A.negative { color: #e48743; }
-.menu DIV          { display: inline-block; width: 36%; }
-.menu .button      { width: 100%; margin: 0.1em 0em; }
+/* Menu: boxes positions */
+.menu                { margin-bottom: 3em; }
+.menu .box           { position: relative; display: inline-block; }
+.menu .box.month     { width: 76.4%; top: 0.5em; left: 1.8%; }
+.menu .box.logout    { width: 18.2%; top: 0.5em; left: 3.6%; }
+.menu .box.remaining { width: 96.4%; top: 1.0em; left: 1.8%; }
+.menu .box.budget    { width: 47.3%; top: 1.5em; left: 1.8%; }
+.menu .box.add       { width: 47.3%; top: 1.5em; left: 3.6%; }
+/* Specific boxes style */
+.menu .box             { background-color: #90ca77; color: #fff; vertical-align: top; height: 7em; text-align: center; line-height: 2em; border-radius: 0.4em; cursor: pointer; }
+.menu .box *           { font-size: 1.8em; }
+.menu .box.warning     { background-color: #e48743; color: #fff; }
+.menu .box.month I     { margin-top: 1.5em; }
+.menu .box.logout      { text-align: center; }
+.menu .box.logout I    { font-size: 3em; margin-top: 0.7em; }
+.menu .box.remaining * { font-size: 4em; margin-top: 0.6em; display: block; }
+.menu .box.budget SPAN { margin-top: 0.8em; display: block; }
+.menu .box.add I       { margin-top: 0.8em; }
+
+.list-header .remainder          { font-size: 3em; color: #81c6dd; font-weight: bold; text-align: center; white-space: nowrap; }
+.list-header .remainder.negative { color: #e48743; }
+.list-header .button             { display: block; margin-top: 0.8em; }
 
 .list                    { font-size: 1.5em; color: #333; border-collapse: collapse; white-space: nowrap; }
 .list TR                 { background-color: #eafae3; }
@@ -47,6 +68,6 @@ A    { text-decoration: none; }
 .form .primary            { float: right; width: 35%; }
 
 .summary H2    { color: #73a15f; }
-.summary > DIV { width: 50%; margin: 0 auto; }
+.summary > DIV { width: 66%; margin: 0 auto; }
 .summary P *   { display: inline-block; width: 48%; text-align: right; }
 .summary INPUT { font-weight: bold; }
