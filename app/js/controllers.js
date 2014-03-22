@@ -81,7 +81,7 @@ angular.module('Pockey.controllers', [])
 
 		$scope.save = function() {
 			RemoteService.addExpense($scope.expense);
-			$location.path('/expenses');
+			$location.path('/menu');
 		};
 	}])
 ;
