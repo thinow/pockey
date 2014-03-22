@@ -1,5 +1,5 @@
 <div class="content menu">
 	<div><div class="box month" ng-click="startNextMonth()"><i class="fa fa-calendar"></i><span class="capitalized"> {{ month | date:'MMMM' }}</span></div><div class="box logout warning" ng-click="logout()"><i class="fa fa-power-off"></i></div></div>
-	<div><div class="box remaining" ng-class="{warning : computeRemainder() < 0}"><span>{{ computeRemainder() | signedCurrency }}</span></div></div>
-	<div><div class="box budget"><span>Budget<br />{{ budget }} &euro;</span></div><div class="box add"><i class="fa fa-plus"></i><span> Nouvelle d&eacute;pense</span></div></div>
+	<div><div class="box remaining" ng-class="{warning : computeRemainder() < 0}" ng-click="goTo('/expenses')"><span>{{ computeRemainder() | signedCurrency }}</span></div></div>
+	<div><div class="box budget" ng-click="goTo('/expenses/summary')"><span>Budget<br />{{ budget }} &euro;</span></div><div class="box add" ng-click="goTo('/expenses/add-entry')"><i class="fa fa-plus"></i><span> Nouvelle d&eacute;pense</span></div></div>
 </div>
