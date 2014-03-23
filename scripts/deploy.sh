@@ -8,12 +8,14 @@ if [ "$PHASE" = "production" ]; then
 	TAG=stable/$VERSION
 	OVERRIDE_TAG=false
 	HTML_VERSION="version $VERSION"
+	HTML_STYLE=""
 elif [ "$PHASE" = "staging" ]; then
 	VERSION="staging"
 	BRANCH_PATTERN="^.*$"
 	TAG=$VERSION
 	OVERRIDE_TAG=true
-	HTML_VERSION="<span style=\"background-color: orange; display: block; font-weight: bold; color: black;\">Environnement de STAGING</span>"
+	HTML_VERSION="Environnement de recette"
+	HTML_STYLE="staging"
 fi
 
 if [ "$VERSION" = "" ]; then
@@ -66,5 +68,6 @@ git push --force origin $TAG
 
 echo "--- Inject version in application"
 sed -i "s/@@VERSION@@/$HTML_VERSION/g" app/index.html
+sed -i "s/@@STYLE@@/$HTML_STYLE/g" app/index.html
 
 

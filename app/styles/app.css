@@ -20,7 +20,9 @@ A    { text-decoration: none; }
 
 .body    { margin-top: 0.5em; }
 .content { width: 95%; margin: 1.5em auto; }
-.version { text-align: center; font-size: 0.8em; color: #888; }
+
+.version         { text-align: center; font-size: 0.8em; color: #888; }
+.version.staging { background-color: #73a15f; font-weight: bold; color: #fff; }
 
 .loading { text-align: center; color: #81c6dd; font-weight: bold; }
 
