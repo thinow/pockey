@@ -3,13 +3,17 @@
 
 PHASE=$1
 if [ "$PHASE" = "production" ]; then
-	VERSION=stable/$2
+	VERSION=$2
 	BRANCH_PATTERN="^master$"
+	TAG=stable/$VERSION
 	OVERRIDE_TAG=false
+	HTML_VERSION="version $VERSION"
 elif [ "$PHASE" = "staging" ]; then
 	VERSION="staging"
 	BRANCH_PATTERN="^.*$"
+	TAG=$VERSION
 	OVERRIDE_TAG=true
+	HTML_VERSION="<span style=\"background-color: orange; display: block; font-weight: bold; color: black;\">Environnement de STAGING</span>"
 fi
 
 if [ "$VERSION" = "" ]; then
@@ -47,7 +51,7 @@ else
 fi
 
 echo -n "New version                : "
-if [ $OVERRIDE_TAG ] || [ `git tag --list | grep -c "^$VERSION$"` -eq 1 ]; then
+if [ $OVERRIDE_TAG ] || [ `git tag --list | grep -c "^$TAG$"` -eq 1 ]; then
 	echo "OK"
 else
 	echo "Error!"
@@ -57,7 +61,10 @@ fi
 
 
 echo "--- Tag version"
-git tag  --force $VERSION
-git push --force origin $VERSION
+git tag  --force $TAG
+git push --force origin $TAG
+
+echo "--- Inject version in application"
+sed -i "s/@@VERSION@@/$HTML_VERSION/g" app/index.html
 
 
