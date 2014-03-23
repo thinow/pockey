@@ -66,8 +66,19 @@ echo "--- Tag version"
 git tag  --force $TAG
 git push --force origin $TAG
 
+
+
 echo "--- Inject version in application"
 sed -i "s/@@VERSION@@/$HTML_VERSION/g" app/index.html
 sed -i "s/@@STYLE@@/$HTML_STYLE/g" app/index.html
 
+
+
+echo "--- Deploy on host"
+firebase deploy
+
+
+
+echo "--- Clean modifications"
+git reset --hard
 
