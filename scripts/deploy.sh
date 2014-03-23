@@ -4,8 +4,10 @@
 PHASE=$1
 if [ "$PHASE" = "production" ]; then
 	VERSION=$2
+	BRANCH_PATTERN="^master$"
 elif [ "$PHASE" = "staging" ]; then
 	VERSION="staging"
+	BRANCH_PATTERN="^.*$"
 fi
 
 if [ "$VERSION" = "" ]; then
@@ -33,4 +35,13 @@ else
 	echo "Error!"
 	exit
 fi
+
+echo -n "Expected current branch    : "
+if [ `git branch | sed -n -e 's/^\* \(.*\)/\1/p' | grep -c $BRANCH_PATTERN $CURRENT_BRANCH` -eq 1 ]; then
+	echo "OK"
+else
+	echo "Error!"
+	exit
+fi
+
 
