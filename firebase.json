@@ -1,5 +1,5 @@
 {
-  "firebase": "pockey",
+  "firebase": "@@HOST@@",
   "public": "app",
   "rules": "config/security-rules.js"
 }
