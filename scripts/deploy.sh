@@ -9,6 +9,7 @@ if [ "$PHASE" = "production" ]; then
 	OVERRIDE_TAG=false
 	HTML_VERSION="version $VERSION"
 	HTML_STYLE=""
+	HOST="pockey"
 elif [ "$PHASE" = "staging" ]; then
 	VERSION="staging"
 	BRANCH_PATTERN="^.*$"
@@ -16,6 +17,7 @@ elif [ "$PHASE" = "staging" ]; then
 	OVERRIDE_TAG=true
 	HTML_VERSION="Environnement de recette"
 	HTML_STYLE="staging"
+	HOST="pockey-dev"
 fi
 
 if [ "$VERSION" = "" ]; then
@@ -75,6 +77,8 @@ sed -i "s/@@STYLE@@/$HTML_STYLE/g" app/index.html
 
 
 echo "--- Deploy on host"
+sed -i "s/@@HOST@@/$HOST/g" firebase.json
+sed -i "s/pockey-dev.firebaseio.com/$HOST.firebaseio.com/g" app/js/app.js
 firebase deploy
 
 
