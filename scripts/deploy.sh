@@ -3,7 +3,7 @@
 
 PHASE=$1
 if [ "$PHASE" = "production" ]; then
-	VERSION=$2
+	VERSION=stable/$2
 	BRANCH_PATTERN="^master$"
 	OVERRIDE_TAG=false
 elif [ "$PHASE" = "staging" ]; then
@@ -53,5 +53,11 @@ else
 	echo "Error!"
 	exit
 fi
+
+
+
+echo "--- Tag version"
+git tag  --force $VERSION
+git push --force origin $VERSION
 
 
