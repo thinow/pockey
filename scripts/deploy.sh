@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "--- Pre-conditions"
+
 echo -n "Current folder is root     : "
 if [ -e firebase.json ]; then
 	echo "OK"
