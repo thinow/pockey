@@ -10,7 +10,7 @@ A    { text-decoration: none; }
 .button:DISABLED      { opacity: 0.5; }
 .button.primary       { background: linear-gradient(#08b, #069); color: #fff; border: 1px solid #047; }
 .button.primary:HOVER { background: #08b; }
-.button.cancel        { background: transparent; color: #81c6dd; border-color: transparent; text-decoration: underline; }
+.button.cancel        { background: transparent; color: #81c6dd; border-color: transparent; text-decoration: underline; border: 0; padding-left: 0; padding-right: 0; }
 .button.cancel:HOVER  { background: transparent; }
 
 .header                   { background: linear-gradient(#90ca77, #73a15f); color: #ffffff; border-bottom: 1px solid #567947; height: 4em; }
@@ -21,7 +21,7 @@ A    { text-decoration: none; }
 .body    { margin-top: 0.5em; }
 .content { width: 95%; margin: 1.5em auto; }
 
-.version         { text-align: center; font-size: 0.8em; color: #888; }
+.version         { text-align: center; font-size: 0.8em; color: #ccc; margin-top: 6em; }
 .version.staging { background-color: #73a15f; font-weight: bold; color: #fff; }
 
 .loading { text-align: center; color: #81c6dd; font-weight: bold; }
