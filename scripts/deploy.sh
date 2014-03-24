@@ -54,8 +54,8 @@ else
 	exit
 fi
 
-echo -n "New version                : "
-if [ $OVERRIDE_TAG ] || [ `git tag --list | grep -c "^$TAG$"` -eq 1 ]; then
+echo -n "Unique version             : "
+if $OVERRIDE_TAG || [ `git tag --list | grep -c "^$TAG$"` -eq 0 ]; then
 	echo "OK"
 else
 	echo "Error!"
