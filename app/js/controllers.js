@@ -16,11 +16,6 @@ angular.module('Pockey.controllers', [])
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget', default : 100 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum',    default : 0 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : DateService.findCurrentMonth() });
-		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
-
-		$scope.computeRemainder = function() {
-			return $scope.budget - RemoteService.sumExpenses($scope.expenses);
-		};
 
 		$scope.startNextMonth = function() {
 			if ($window.confirm('Passer au mois suivant ?')) {
