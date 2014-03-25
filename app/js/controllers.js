@@ -33,7 +33,7 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('ListController', ['$scope', '$window', 'RemoteService', 'DateService', function ($scope, $window, RemoteService, DateService) {
+	.controller('ListController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
