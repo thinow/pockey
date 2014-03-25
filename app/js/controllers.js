@@ -42,11 +42,7 @@ angular.module('Pockey.controllers', [])
 	.controller('SummaryController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
-		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
-
-		$scope.getExpensesSum = function() {
-			return RemoteService.sumExpenses($scope.expenses);
-		};
+		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 	}])
 
 	.controller('AddController', ['$scope', '$location', 'RemoteService', 'DateService', function ($scope, $location, RemoteService, DateService) {
