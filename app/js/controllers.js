@@ -14,6 +14,7 @@ angular.module('Pockey.controllers', [])
 
 	.controller('MenuController', ['$scope', '$window', '$location', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $window, $location, RemoteService, DateService, AuthentificationService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget', default : 100 });
+		RemoteService.inject($scope, { link : '/users/{{user}}/sum',    default : 0 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : DateService.findCurrentMonth() });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
 
