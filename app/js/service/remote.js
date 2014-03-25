@@ -37,6 +37,9 @@ angular.module('Pockey.service.remote', ['firebase'])
 			},
 
 			addExpense : function(expense) {
+				this.doOnce('/users/{{user}}/sum', function(sum, value) {
+					sum.set(value + expense.cost);
+				});
 				this.getNode('/users/{{user}}/expenses').$add(expense);
 			},
 
@@ -54,9 +57,20 @@ angular.module('Pockey.service.remote', ['firebase'])
 				this.getNode('/users/{{user}}/expenses').$remove();
 			},
 
+			doOnce : function(pattern, callback) {
+				var ref = this.getRef(pattern);
+				ref.once('value', function(snapshot) {
+					callback(ref, snapshot.val());
+				});
+			},
+
 			getNode : function(pattern) {
+				return $firebase(this.getRef(pattern));
+			},
+
+			getRef : function(pattern) {
 				var link = this.buildLink(pattern);
-				return $firebase(new Firebase(REMOTE_SERVER + link));
+				return new Firebase(REMOTE_SERVER + link);
 			},
 
 			buildLink : function(pattern) {
