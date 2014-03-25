@@ -14,12 +14,8 @@ angular.module('Pockey.controllers', [])
 
 	.controller('MenuController', ['$scope', '$window', '$location', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $window, $location, RemoteService, DateService, AuthentificationService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget', default : 100 });
+		RemoteService.inject($scope, { link : '/users/{{user}}/sum',    default : 0 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : DateService.findCurrentMonth() });
-		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
-
-		$scope.computeRemainder = function() {
-			return $scope.budget - RemoteService.sumExpenses($scope.expenses);
-		};
 
 		$scope.startNextMonth = function() {
 			if ($window.confirm('Passer au mois suivant ?')) {
@@ -37,23 +33,16 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('ListController', ['$scope', '$window', 'RemoteService', 'DateService', function ($scope, $window, RemoteService, DateService) {
+	.controller('ListController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
+		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
-
-		$scope.computeRemainder = function() {
-			return $scope.budget - RemoteService.sumExpenses($scope.expenses);
-		};
 	}])
 
 	.controller('SummaryController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
-		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
-
-		$scope.getExpensesSum = function() {
-			return RemoteService.sumExpenses($scope.expenses);
-		};
+		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 	}])
 
 	.controller('AddController', ['$scope', '$location', 'RemoteService', 'DateService', function ($scope, $location, RemoteService, DateService) {

@@ -39,7 +39,7 @@ A    { text-decoration: none; }
 .menu .box           { position: relative; display: inline-block; }
 .menu .box.month     { width: 76.4%; top: 0.5em; left: 1.8%; }
 .menu .box.logout    { width: 18.2%; top: 0.5em; left: 3.6%; }
-.menu .box.remaining { width: 96.4%; top: 1.0em; left: 1.8%; }
+.menu .box.remainder { width: 96.4%; top: 1.0em; left: 1.8%; }
 .menu .box.budget    { width: 47.3%; top: 1.5em; left: 1.8%; }
 .menu .box.add       { width: 47.3%; top: 1.5em; left: 3.6%; }
 /* Specific boxes style */
@@ -49,7 +49,7 @@ A    { text-decoration: none; }
 .menu .box.month I     { margin-top: 1.5em; }
 .menu .box.logout      { text-align: center; }
 .menu .box.logout I    { font-size: 3em; margin-top: 0.7em; }
-.menu .box.remaining * { font-size: 4em; margin-top: 0.6em; display: block; }
+.menu .box.remainder * { font-size: 4em; margin-top: 0.6em; display: block; }
 .menu .box.budget SPAN { margin-top: 0.8em; display: block; }
 .menu .box.add I       { margin-top: 0.8em; }
 

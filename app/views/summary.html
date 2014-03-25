@@ -7,12 +7,12 @@
 		</p>
 		<p>
 			<span>Dépenses :</span>
-			<span>{{ -getExpensesSum() | signedCurrency }}</span>
+			<span>{{ -sum | signedCurrency }}</span>
 		</p>
 		<hr>
 		<p>
 			<span>Reste :</span>
-			<span>{{ budget - getExpensesSum() | signedCurrency }}</span>
+			<span>{{ budget - sum | signedCurrency }}</span>
 		</p>
 	</div>
 	<a href="#/menu" class="button cancel center">Retour</a>

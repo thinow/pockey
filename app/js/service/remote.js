@@ -2,7 +2,7 @@
 
 angular.module('Pockey.service.remote', ['firebase'])
 
-	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout, $filter) {
+	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout) {
 		return {
 			inject : function(scope, data) {
 				data.name = this.findNodeName(data);
@@ -37,15 +37,10 @@ angular.module('Pockey.service.remote', ['firebase'])
 			},
 
 			addExpense : function(expense) {
-				this.getNode('/users/{{user}}/expenses').$add(expense);
-			},
-
-			sumExpenses : function(expenses) {
-				var sum = 0;
-				angular.forEach($filter('asArray')(expenses), function(expense) {
-					sum += expense.cost;
+				this.doOnce('/users/{{user}}/sum', function(sum, value) {
+					sum.set(value + expense.cost);
 				});
-				return sum;
+				this.getNode('/users/{{user}}/expenses').$add(expense);
 			},
 
 			changeRemoteMonth : function(month) {
@@ -54,9 +49,20 @@ angular.module('Pockey.service.remote', ['firebase'])
 				this.getNode('/users/{{user}}/expenses').$remove();
 			},
 
+			doOnce : function(pattern, callback) {
+				var ref = this.getRef(pattern);
+				ref.once('value', function(snapshot) {
+					callback(ref, snapshot.val());
+				});
+			},
+
 			getNode : function(pattern) {
+				return $firebase(this.getRef(pattern));
+			},
+
+			getRef : function(pattern) {
 				var link = this.buildLink(pattern);
-				return $firebase(new Firebase(REMOTE_SERVER + link));
+				return new Firebase(REMOTE_SERVER + link);
 			},
 
 			buildLink : function(pattern) {
