@@ -2,7 +2,7 @@
 
 angular.module('Pockey.service.remote', ['firebase'])
 
-	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout, $filter) {
+	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout) {
 		return {
 			inject : function(scope, data) {
 				data.name = this.findNodeName(data);
@@ -41,14 +41,6 @@ angular.module('Pockey.service.remote', ['firebase'])
 					sum.set(value + expense.cost);
 				});
 				this.getNode('/users/{{user}}/expenses').$add(expense);
-			},
-
-			sumExpenses : function(expenses) {
-				var sum = 0;
-				angular.forEach($filter('asArray')(expenses), function(expense) {
-					sum += expense.cost;
-				});
-				return sum;
 			},
 
 			changeRemoteMonth : function(month) {
