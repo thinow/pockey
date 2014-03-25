@@ -1,5 +1,5 @@
 <div class="content list-header">
-	<div class="remainder" ng-class="{negative : computeRemainder() < 0}">{{ computeRemainder() | signedCurrency }}</div>
+	<div class="remainder" ng-class="{negative : budget-sum < 0}">{{ budget-sum | signedCurrency }}</div>
 	<a href="#/expenses/add-entry" class="button primary"><i class="fa fa-plus-circle"></i> Nouvelle dépense</a>
 </div>
 <table class="content list">
