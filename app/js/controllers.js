@@ -58,13 +58,15 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('OptionsController', ['$scope', 'RemoteService', 'AuthentificationService', function ($scope, RemoteService, AuthentificationService) {
+	.controller('OptionsController', ['$scope', '$window', 'RemoteService', 'AuthentificationService', function ($scope, $window, RemoteService, AuthentificationService) {
 		$scope.logout = function() {
 			AuthentificationService.logout();
 		};
 
 		$scope.erase = function() {
-			RemoteService.eraseUser();
+			if ($window.confirm('Supprimmer votre compte ?')) {
+				RemoteService.eraseUser();
+			}
 		};
 	}])
 ;
