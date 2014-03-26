@@ -57,4 +57,14 @@ angular.module('Pockey.controllers', [])
 			$location.path('/menu');
 		};
 	}])
+
+	.controller('OptionsController', ['$scope', 'RemoteService', 'AuthentificationService', function ($scope, RemoteService, AuthentificationService) {
+		$scope.logout = function() {
+			AuthentificationService.logout();
+		};
+
+		$scope.erase = function() {
+			RemoteService.eraseUser();
+		};
+	}])
 ;
