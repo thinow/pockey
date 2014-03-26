@@ -19,6 +19,7 @@ angular.module('Pockey', [
 			.when('/expenses',              { templateUrl : 'views/list.html',    controller : 'ListController' })
 			.when('/expenses/summary',      { templateUrl : 'views/summary.html', controller : 'SummaryController' })
 			.when('/expenses/add-entry',    { templateUrl : 'views/detail.html',  controller : 'AddController' })
+			.when('/options',               { templateUrl : 'views/options.html', controller : 'OptionsController' })
 			.otherwise({ redirectTo : '/' });
 	})
 

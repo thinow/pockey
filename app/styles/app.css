@@ -10,6 +10,8 @@ A    { text-decoration: none; }
 .button:DISABLED      { opacity: 0.5; }
 .button.primary       { background: linear-gradient(#08b, #069); color: #fff; border: 1px solid #047; }
 .button.primary:HOVER { background: #08b; }
+.button.danger        { background: linear-gradient(#d00, #b00); color: #fff; border: 1px solid #900; }
+.button.danger:HOVER  { background: #d00; }
 .button.cancel        { background: transparent; color: #81c6dd; border-color: transparent; text-decoration: underline; border: 0; padding-left: 0; padding-right: 0; }
 .button.cancel:HOVER  { background: transparent; }
 
@@ -74,3 +76,5 @@ A    { text-decoration: none; }
 .summary > DIV { width: 66%; margin: 0 auto; }
 .summary P *   { display: inline-block; width: 48%; text-align: right; }
 .summary INPUT { font-weight: bold; }
+
+.options .button { width: 100%; margin: 2em 0;  }
