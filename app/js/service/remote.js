@@ -50,6 +50,12 @@ angular.module('Pockey.service.remote', ['firebase'])
 				this.getNode('/users/{{user}}/expenses').$remove();
 			},
 
+			eraseUser : function() {
+				this.getRef('/users/{{user}}').remove(function() {
+					AuthentificationService.logout();
+				});
+			},
+
 			doOnce : function(pattern, callback) {
 				var ref = this.getRef(pattern);
 				ref.once('value', function(snapshot) {

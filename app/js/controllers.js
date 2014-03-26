@@ -12,7 +12,7 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('MenuController', ['$scope', '$window', '$location', 'RemoteService', 'DateService', 'AuthentificationService', function ($scope, $window, $location, RemoteService, DateService, AuthentificationService) {
+	.controller('MenuController', ['$scope', '$window', '$location', 'RemoteService', 'DateService', function ($scope, $window, $location, RemoteService, DateService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget', default : 100 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum',    default : 0 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : DateService.findCurrentMonth() });
@@ -22,10 +22,6 @@ angular.module('Pockey.controllers', [])
 				var nextMonth = DateService.findNextMonth($scope.month);
 				RemoteService.changeRemoteMonth(nextMonth);
 			}
-		};
-
-		$scope.logout = function() {
-			AuthentificationService.logout();
 		};
 
 		$scope.goTo = function(path) {
@@ -59,6 +55,18 @@ angular.module('Pockey.controllers', [])
 		$scope.save = function() {
 			RemoteService.addExpense($scope.expense);
 			$location.path('/menu');
+		};
+	}])
+
+	.controller('OptionsController', ['$scope', '$window', 'RemoteService', 'AuthentificationService', function ($scope, $window, RemoteService, AuthentificationService) {
+		$scope.logout = function() {
+			AuthentificationService.logout();
+		};
+
+		$scope.erase = function() {
+			if ($window.confirm('Supprimmer votre compte ?')) {
+				RemoteService.eraseUser();
+			}
 		};
 	}])
 ;
