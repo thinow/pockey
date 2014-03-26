@@ -70,15 +70,17 @@ git push --force origin $TAG
 
 
 
-echo "--- Inject version in application"
+echo "--- Inject values in scripts"
+TOKEN=`date +%s`
+sed -i "s/@@RELEASE_TOKEN@@/$TOKEN/g" app/index.html
 sed -i "s/@@VERSION@@/$HTML_VERSION/g" app/index.html
 sed -i "s/@@STYLE@@/$HTML_STYLE/g" app/index.html
+sed -i "s/@@HOST@@/$HOST/g" firebase.json
+sed -i "s/pockey-dev.firebaseio.com/$HOST.firebaseio.com/g" app/js/app.js
 
 
 
 echo "--- Deploy on host"
-sed -i "s/@@HOST@@/$HOST/g" firebase.json
-sed -i "s/pockey-dev.firebaseio.com/$HOST.firebaseio.com/g" app/js/app.js
 firebase deploy
 
 
