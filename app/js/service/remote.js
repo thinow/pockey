@@ -46,6 +46,7 @@ angular.module('Pockey.service.remote', ['firebase'])
 			changeRemoteMonth : function(month) {
 				var formattedMonth = DateService.format(month);
 				this.getNode('/users/{{user}}/month').$set(formattedMonth);
+				this.getNode('/users/{{user}}/sum').$set(0);
 				this.getNode('/users/{{user}}/expenses').$remove();
 			},
 
