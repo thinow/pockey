@@ -4,6 +4,7 @@
 </div>
 <table class="content list">
 	<tbody>
+		<tr ng-show="expenses | isEmpty"><td>Liste vide</td></tr>
 		<tr ng-repeat="expense in expenses | asArray | orderBy:'date':true" ng-class-even="'even'">
 			<td>
 				<span title="{{expense.category.text}}" style="background-color: #{{expense.category.color}}">

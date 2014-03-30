@@ -20,4 +20,25 @@ angular.module('Pockey.filters', [])
 			}
 		};
 	})
+
+	.filter('isEmpty', function($filter) {
+		return function(input) {
+			var keys = $filter('keys')(input);
+			return keys.length == 0;
+		};
+	})
+
+	.filter('keys', function() {
+		return function(input) {
+			var keys = [];
+
+			angular.forEach(input, function(value, key) {
+				if (!angular.isFunction(value)) {
+					this.push(key);
+				}
+			}, keys);
+
+			return keys;
+		};
+	})
 ;
