@@ -29,10 +29,14 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('ListController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
+	.controller('ListController', ['$scope', '$location', 'RemoteService', function ($scope, $location, RemoteService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
+
+		$scope.goTo = function(path) {
+			$location.path(path);
+		};
 	}])
 
 	.controller('SummaryController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
@@ -56,6 +60,9 @@ angular.module('Pockey.controllers', [])
 			RemoteService.addExpense($scope.expense);
 			$location.path('/menu');
 		};
+	}])
+
+	.controller('EditController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
 	}])
 
 	.controller('OptionsController', ['$scope', '$window', 'RemoteService', 'AuthentificationService', function ($scope, $window, RemoteService, AuthentificationService) {

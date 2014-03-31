@@ -1,11 +1,11 @@
 <div class="content list-header">
 	<div class="remainder" ng-class="{negative : budget - sum < 0}">{{ budget - sum | signedCurrency }}</div>
-	<a href="#/expenses/add" class="button primary"><i class="fa fa-plus-circle"></i> Nouvelle dépense</a>
+	<a href="#/expenses/add-entry" class="button primary"><i class="fa fa-plus-circle"></i> Nouvelle dépense</a>
 </div>
 <table class="content list">
 	<tbody>
 		<tr ng-show="expenses | isEmpty"><td>Liste vide</td></tr>
-		<tr ng-repeat="expense in expenses | asArray | orderBy:'date':true" ng-class-even="'even'">
+		<tr ng-repeat="expense in expenses | asArray | orderBy:'date':true" ng-class-even="'even'" ng-click="goTo('/expenses/edit/' + expense.$id)">
 			<td>
 				<span title="{{expense.category.text}}" style="background-color: #{{expense.category.color}}">
 					<i class="fa fa-{{expense.category.icon}}"></i>
