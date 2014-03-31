@@ -13,32 +13,24 @@ angular.module('Pockey.filters', [])
 
 	.filter('asArray', function($filter) {
 		return function(input) {
-			if (angular.isUndefined(input)) {
-				return input;
-			} else {
-				return $filter('orderByPriority')(input);
-			}
+			var array = [];
+
+			angular.forEach(input, function(value, key) {
+				if (!angular.isFunction(value)) {
+					value.$id = key;
+					this.push(value);
+				}
+			}, array);
+
+			return array;
 		};
 	})
 
 	.filter('isEmpty', function($filter) {
 		return function(input) {
-			var keys = $filter('keys')(input);
-			return keys.length == 0;
+			var array = $filter('asArray')(input);
+			return Object.keys(array).length == 0;
 		};
 	})
 
-	.filter('keys', function() {
-		return function(input) {
-			var keys = [];
-
-			angular.forEach(input, function(value, key) {
-				if (!angular.isFunction(value)) {
-					this.push(key);
-				}
-			}, keys);
-
-			return keys;
-		};
-	})
 ;
