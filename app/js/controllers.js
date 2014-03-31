@@ -64,7 +64,7 @@ angular.module('Pockey.controllers', [])
 		};
 
 		$scope.erase = function() {
-			if ($window.confirm('Supprimmer votre compte ?')) {
+			if ($window.confirm('Supprimer votre compte ?')) {
 				RemoteService.eraseUser();
 			}
 		};
