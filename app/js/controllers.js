@@ -25,7 +25,7 @@ angular.module('Pockey.controllers', [])
 		};
 
 		$scope.goTo = function(path) {
-			$location.path(path);
+			return $location.path(path);
 		};
 	}])
 
@@ -45,7 +45,7 @@ angular.module('Pockey.controllers', [])
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 	}])
 
-	.controller('AddController', ['$scope', '$location', 'RemoteService', 'DateService', function ($scope, $location, RemoteService, DateService) {
+	.controller('AddController', ['$scope', '$location', '$routeParams', 'RemoteService', 'DateService', function ($scope, $location, $routeParams, RemoteService, DateService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 		RemoteService.inject($scope, { link : '/categories' });
 
@@ -58,8 +58,14 @@ angular.module('Pockey.controllers', [])
 
 		$scope.save = function() {
 			RemoteService.addExpense($scope.expense);
-			$location.path('/menu');
+			$scope.back();
 		};
+
+		$scope.back = function() {
+			var previousPage = '/' + $routeParams.from;
+			delete $location.$$search.from;
+			$location.path(previousPage);
+		}
 	}])
 
 	.controller('EditController', ['$scope', 'RemoteService', function ($scope, RemoteService) {

@@ -26,9 +26,9 @@
 		<span ng-show="form.date.$error.pattern">Mauvais format (aaaa-mm-jj)</span>
 	</div>
 	
-	<a href="#/menu" class="button cancel">
+	<button ng-click="back()" class="button cancel">
 		<i class="fa fa-angle-double-left"></i> Annuler
-	</a>
+	</button>
 	<button ng-click="save()" ng-disabled="!form.$valid" class="button primary">
 		<i class="fa fa-plus"></i> Ajouter
 	</button>
