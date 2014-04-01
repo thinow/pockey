@@ -5,14 +5,19 @@
 <table class="content list">
 	<tbody>
 		<tr ng-show="expenses | isEmpty"><td>Liste vide</td></tr>
-		<tr ng-repeat="expense in expenses | asArray | orderBy:'date':true" ng-class-even="'even'" ng-click="goTo('/expenses/edit/' + expense.$id)">
-			<td>
+		<tr ng-repeat="expense in expenses | asArray | orderBy:'date':true" ng-class-even="'even'" ng-click="selected = !selected">
+			<td ng-hide="selected">
 				<span title="{{expense.category.text}}" style="background-color: #{{expense.category.color}}">
 					<i class="fa fa-{{expense.category.icon}}"></i>
 				</span>
 			</td>
-			<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
-			<td>{{ -expense.cost | signedCurrency }}</td>
+			<td ng-hide="selected" class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
+			<td ng-hide="selected">{{ -expense.cost | signedCurrency }}</td>
+			<td ng-hide="!selected" colspan="3">
+				<a ng-href="{{'#/expenses/edit/' + expense.$id + '?from=expenses'}}">Modifier</a>
+				/
+				<a>Supprimer</a>
+			</td>
 		</tr>
 	</tbody>
 </table>

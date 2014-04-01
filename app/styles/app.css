@@ -1,5 +1,6 @@
-BODY { font-family: sans-serif; margin: 0; }
-A    { text-decoration: none; }
+BODY    { font-family: sans-serif; margin: 0; }
+A       { text-decoration: none; color: #00f; }
+A:HOVER { cursor: pointer; }
 
 .capitalized { text-transform: capitalize; }
 .error       { color: #e48743; font-style: italic; }
