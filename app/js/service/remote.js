@@ -43,6 +43,13 @@ angular.module('Pockey.service.remote', ['firebase'])
 				this.getNode('/users/{{user}}/expenses').$add(expense);
 			},
 
+			removeExpense : function(id, expense) {
+				this.doOnce('/users/{{user}}/sum', function(sum, value) {
+					sum.set(value - expense.cost);
+				});
+				this.getRef('/users/{{user}}/expenses/' + id).remove();
+			},
+
 			changeRemoteMonth : function(month) {
 				var formattedMonth = DateService.format(month);
 				this.getNode('/users/{{user}}/month').$set(formattedMonth);
@@ -54,13 +61,6 @@ angular.module('Pockey.service.remote', ['firebase'])
 				this.getRef('/users/{{user}}').remove(function() {
 					AuthentificationService.logout();
 				});
-			},
-
-			removeExpense : function(id, expense) {
-				this.doOnce('/users/{{user}}/sum', function(sum, value) {
-					sum.set(value - expense.cost);
-				});
-				this.getRef('/users/{{user}}/expenses/' + id).remove();
 			},
 
 			doOnce : function(pattern, callback) {
