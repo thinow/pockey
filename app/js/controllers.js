@@ -34,8 +34,8 @@ angular.module('Pockey.controllers', [])
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
 
-		$scope.remove = function(id) {
-			RemoteService.remove('/users/{{user}}/expenses/' + id);
+		$scope.remove = function(id, expense) {
+			RemoteService.removeExpense(id, expense);
 		};
 	}])
 

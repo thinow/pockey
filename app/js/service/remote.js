@@ -56,8 +56,11 @@ angular.module('Pockey.service.remote', ['firebase'])
 				});
 			},
 
-			remove : function(pattern) {
-				this.getRef(pattern).remove();
+			removeExpense : function(id, expense) {
+				this.doOnce('/users/{{user}}/sum', function(sum, value) {
+					sum.set(value - expense.cost);
+				});
+				this.getRef('/users/{{user}}/expenses/' + id).remove();
 			},
 
 			doOnce : function(pattern, callback) {
