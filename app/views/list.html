@@ -16,7 +16,7 @@
 			<td ng-hide="!selected" colspan="3">
 				<a ng-href="{{'#/expenses/edit/' + expense.$id + '?from=expenses'}}">Modifier</a>
 				/
-				<a>Supprimer</a>
+				<a ng-click="remove(expense.$id)">Supprimer</a>
 			</td>
 		</tr>
 	</tbody>

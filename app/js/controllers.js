@@ -29,13 +29,13 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('ListController', ['$scope', '$location', 'RemoteService', function ($scope, $location, RemoteService) {
+	.controller('ListController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
 
-		$scope.goTo = function(path) {
-			$location.path(path);
+		$scope.remove = function(id) {
+			RemoteService.remove('/users/{{user}}/expenses/' + id);
 		};
 	}])
 
