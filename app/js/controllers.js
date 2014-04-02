@@ -49,6 +49,8 @@ angular.module('Pockey.controllers', [])
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 		RemoteService.inject($scope, { link : '/categories' });
 
+		$scope.editMode = angular.isDefined($routeParams.id);
+
 		$scope.findDaysOfMonth = function() {
 			return {
 				first	: DateService.findFirstDayOfMonth($scope.month),
@@ -66,9 +68,6 @@ angular.module('Pockey.controllers', [])
 			delete $location.$$search.from;
 			$location.path(previousPage);
 		}
-	}])
-
-	.controller('EditController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
 	}])
 
 	.controller('OptionsController', ['$scope', '$window', 'RemoteService', 'AuthentificationService', function ($scope, $window, RemoteService, AuthentificationService) {
