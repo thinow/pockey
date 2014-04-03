@@ -72,7 +72,7 @@ A:HOVER { cursor: pointer; }
 .form DIV LABEL           { display: inline-block; text-align: right; width: 30%; }
 .form SPAN                { display: block; margin-left: 31%; }
 .form INPUT, .form SELECT { width: 50%; }
-.form .primary            { float: right; width: 35%; }
+.form .primary            { float: right; width: 40%; }
 
 .summary H2    { color: #73a15f; }
 .summary > DIV { width: 66%; margin: 0 auto; }
