@@ -46,11 +46,11 @@ angular.module('Pockey.controllers', [])
 	}])
 
 	.controller('AddController', ['$scope', '$location', '$routeParams', 'RemoteService', 'DateService', function ($scope, $location, $routeParams, RemoteService, DateService) {
+		$scope.editMode = angular.isDefined($routeParams.id);
+		
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 		RemoteService.inject($scope, { link : '/categories' });
-
-		// Edition mode only
-		if (angular.isDefined($routeParams.id)) {
+		if ($scope.editMode) {
 			RemoteService.inject($scope, { link : '/users/{{user}}/expenses/' + $routeParams.id, name : 'expense' });
 		}
 
@@ -61,9 +61,13 @@ angular.module('Pockey.controllers', [])
 			};
 		};
 
-		$scope.save = function() {
+		$scope.create = function() {
 			RemoteService.addExpense($scope.expense);
 			$scope.back();
+		};
+
+		$scope.update = function() {
+			throw 'Not yet implemented';
 		};
 
 		$scope.back = function() {
