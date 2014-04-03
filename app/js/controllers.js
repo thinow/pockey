@@ -45,7 +45,7 @@ angular.module('Pockey.controllers', [])
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 	}])
 
-	.controller('AddController', ['$scope', '$location', '$routeParams', 'RemoteService', 'DateService', function ($scope, $location, $routeParams, RemoteService, DateService) {
+	.controller('DetailController', ['$scope', '$location', '$routeParams', 'RemoteService', 'DateService', function ($scope, $location, $routeParams, RemoteService, DateService) {
 		$scope.editMode = angular.isDefined($routeParams.id);
 		
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
