@@ -14,9 +14,8 @@
 			<td ng-hide="selected" class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
 			<td ng-hide="selected">{{ -expense.cost | signedCurrency }}</td>
 			<td ng-hide="!selected" colspan="3">
-				<a ng-href="{{'#/expenses/edit/' + expense.$id + '?from=expenses'}}">Modifier</a>
-				/
-				<a ng-click="remove(expense.$id, expense)">Supprimer</a>
+				<a class="button primary" ng-href="{{'#/expenses/edit/' + expense.$id + '?from=expenses'}}">Modifier</a>
+				<a class="button primary" ng-click="remove(expense.$id, expense)">Supprimer</a>
 			</td>
 		</tr>
 	</tbody>
