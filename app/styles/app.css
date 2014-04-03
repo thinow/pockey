@@ -1,5 +1,6 @@
-BODY { font-family: sans-serif; margin: 0; }
-A    { text-decoration: none; }
+BODY    { font-family: sans-serif; margin: 0; }
+A       { text-decoration: none; color: #00f; }
+A:HOVER { cursor: pointer; }
 
 .capitalized { text-transform: capitalize; }
 .error       { color: #e48743; font-style: italic; }
@@ -8,11 +9,11 @@ A    { text-decoration: none; }
 .button               { background: linear-gradient(#fff, #ccc); color: #333; border: 1px solid #aaa; border-radius: 0.7em; padding: 0.3em; display: inline-block; font-size: 1em; text-align: center; }
 .button:HOVER         { background: #fff; }
 .button:DISABLED      { opacity: 0.5; }
-.button.primary       { background: linear-gradient(#08b, #069); color: #fff; border: 1px solid #047; }
-.button.primary:HOVER { background: #08b; }
+.button.primary       { background: linear-gradient(#73a15f, #567947); color: #fff; border: 1px solid #345725; }
+.button.primary:HOVER { background: #73a15f; }
 .button.danger        { background: linear-gradient(#d00, #b00); color: #fff; border: 1px solid #900; }
 .button.danger:HOVER  { background: #d00; }
-.button.cancel        { background: transparent; color: #81c6dd; border-color: transparent; text-decoration: underline; border: 0; padding-left: 0; padding-right: 0; }
+.button.cancel        { background: transparent; color: #90ca77; border-color: transparent; text-decoration: underline; border: 0; padding-left: 0; padding-right: 0; }
 .button.cancel:HOVER  { background: transparent; }
 
 .header                   { background: linear-gradient(#90ca77, #73a15f); color: #ffffff; border-bottom: 1px solid #567947; height: 4em; }
@@ -26,7 +27,7 @@ A    { text-decoration: none; }
 .version         { text-align: center; font-size: 0.8em; color: #ccc; margin-top: 6em; }
 .version.staging { background-color: #73a15f; font-weight: bold; color: #fff; }
 
-.loading { text-align: center; color: #81c6dd; font-weight: bold; }
+.loading { text-align: center; color: #90ca77; font-weight: bold; }
 
 .home                    { text-align: center; }
 .home .message           { margin-top: 3em; }
@@ -55,7 +56,7 @@ A    { text-decoration: none; }
 .menu .box.budget SPAN { margin-top: 0.8em; display: block; }
 .menu .box.add I       { margin-top: 0.8em; }
 
-.list-header .remainder          { font-size: 3em; color: #81c6dd; font-weight: bold; text-align: center; white-space: nowrap; }
+.list-header .remainder          { font-size: 3em; color: #90ca77; font-weight: bold; text-align: center; white-space: nowrap; }
 .list-header .remainder.negative { color: #e48743; }
 .list-header .button             { display: block; margin-top: 0.8em; }
 
@@ -64,13 +65,14 @@ A    { text-decoration: none; }
 .list TR.even            { background-color: #e1f2da; }
 .list TR TD              { text-align: center; padding: 0.2em 1em; }
 .list TR TD:nth-child(3) { text-align: right; }
+.list .button            { font-size: 45%; vertical-align: middle; margin: 0 10%; }
 .list SPAN               { color: #fff; display: inline-block; width: 1.5em; border-radius: 0.3em; }
 
 .form DIV                 { height: 3em; margin: 0.2em 0; }
 .form DIV LABEL           { display: inline-block; text-align: right; width: 30%; }
 .form SPAN                { display: block; margin-left: 31%; }
 .form INPUT, .form SELECT { width: 50%; }
-.form .primary            { float: right; width: 35%; }
+.form .primary            { float: right; width: 40%; }
 
 .summary H2    { color: #73a15f; }
 .summary > DIV { width: 66%; margin: 0 auto; }

@@ -5,7 +5,9 @@ angular.module('Pockey.service.remote', ['firebase'])
 	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout) {
 		return {
 			inject : function(scope, data) {
-				data.name = this.findNodeName(data);
+				if (angular.isUndefined(data.name)) {
+					data.name = this.findNodeName(data);
+				}
 
 				var self = this;
 				AuthentificationService.register('login',  function() { self.bind(scope, data); });
@@ -26,7 +28,10 @@ angular.module('Pockey.service.remote', ['firebase'])
 					var newValue = angular.isDate(data.default) ? DateService.format(data.default) : data.default;
 					this.intercept(node, function() { node.$set(newValue); });
 				}
-				node.$bind(scope, data.name);
+
+				node.$bind(scope, data.name).then(function(unbind) {
+					if (data.unbound) unbind();
+				});
 			},
 
 			intercept : function(node, callback) {
@@ -36,11 +41,29 @@ angular.module('Pockey.service.remote', ['firebase'])
 				});
 			},
 
+			updateExpense : function(id, expense) {
+				var self = this;
+				this.doOnce('/users/{{user}}/expenses/' + id, function(ref, old) {
+					self.doOnce('/users/{{user}}/sum', function(sum, value) {
+						sum.set((value - old.cost) + expense.cost);
+					});
+					self.getRef('/users/{{user}}/expenses/' + id).remove();
+					self.getNode('/users/{{user}}/expenses').$add(expense);
+				});
+			},
+
 			addExpense : function(expense) {
 				this.doOnce('/users/{{user}}/sum', function(sum, value) {
 					sum.set(value + expense.cost);
 				});
 				this.getNode('/users/{{user}}/expenses').$add(expense);
+			},
+
+			removeExpense : function(id, expense) {
+				this.doOnce('/users/{{user}}/sum', function(sum, value) {
+					sum.set(value - expense.cost);
+				});
+				this.getRef('/users/{{user}}/expenses/' + id).remove();
 			},
 
 			changeRemoteMonth : function(month) {

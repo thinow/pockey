@@ -1,18 +1,22 @@
 <div class="content list-header">
 	<div class="remainder" ng-class="{negative : budget - sum < 0}">{{ budget - sum | signedCurrency }}</div>
-	<a href="#/expenses/add-entry" class="button primary"><i class="fa fa-plus-circle"></i> Nouvelle dépense</a>
+	<a href="#/expenses/add?from=expenses" class="button primary"><i class="fa fa-plus-circle"></i> Nouvelle dépense</a>
 </div>
 <table class="content list">
 	<tbody>
 		<tr ng-show="expenses | isEmpty"><td>Liste vide</td></tr>
-		<tr ng-repeat="expense in expenses | asArray | orderBy:'date':true" ng-class-even="'even'">
-			<td>
+		<tr ng-repeat="expense in expenses | asArray | orderBy:'date':true" ng-class-even="'even'" ng-click="selected = !selected">
+			<td ng-hide="selected">
 				<span title="{{expense.category.text}}" style="background-color: #{{expense.category.color}}">
 					<i class="fa fa-{{expense.category.icon}}"></i>
 				</span>
 			</td>
-			<td class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
-			<td>{{ -expense.cost | signedCurrency }}</td>
+			<td ng-hide="selected" class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
+			<td ng-hide="selected">{{ -expense.cost | signedCurrency }}</td>
+			<td ng-hide="!selected" colspan="3">
+				<a class="button primary" ng-href="{{'#/expenses/edit/' + expense.$id + '?from=expenses'}}"><i class="fa fa-wrench"></i> Modifier</a>
+				<a class="button primary" ng-click="remove(expense.$id, expense)"><i class="fa fa-trash-o"></i> Supprimer</a>
+			</td>
 		</tr>
 	</tbody>
 </table>

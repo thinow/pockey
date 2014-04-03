@@ -26,11 +26,14 @@
 		<span ng-show="form.date.$error.pattern">Mauvais format (aaaa-mm-jj)</span>
 	</div>
 	
-	<a href="#/menu" class="button cancel">
+	<button ng-click="back()" class="button cancel">
 		<i class="fa fa-angle-double-left"></i> Annuler
-	</a>
-	<button ng-click="save()" ng-disabled="!form.$valid" class="button primary">
+	</button>
+	<button ng-show="!editMode" ng-click="create()" ng-disabled="!form.$valid" class="button primary">
 		<i class="fa fa-plus"></i> Ajouter
+	</button>
+	<button ng-show="editMode" ng-click="update()" ng-disabled="!form.$valid" class="button primary">
+		<i class="fa fa-save"></i> Sauvegarder
 	</button>
 
 </form>

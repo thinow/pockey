@@ -25,7 +25,7 @@ angular.module('Pockey.controllers', [])
 		};
 
 		$scope.goTo = function(path) {
-			$location.path(path);
+			return $location.path(path);
 		};
 	}])
 
@@ -33,6 +33,10 @@ angular.module('Pockey.controllers', [])
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
+
+		$scope.remove = function(id, expense) {
+			RemoteService.removeExpense(id, expense);
+		};
 	}])
 
 	.controller('SummaryController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
@@ -41,9 +45,19 @@ angular.module('Pockey.controllers', [])
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 	}])
 
-	.controller('AddController', ['$scope', '$location', 'RemoteService', 'DateService', function ($scope, $location, RemoteService, DateService) {
+	.controller('DetailController', ['$scope', '$location', '$routeParams', 'RemoteService', 'DateService', function ($scope, $location, $routeParams, RemoteService, DateService) {
+		$scope.editMode = angular.isDefined($routeParams.id);
+		
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 		RemoteService.inject($scope, { link : '/categories' });
+
+		if ($scope.editMode) {
+			RemoteService.inject($scope, {
+				link    : '/users/{{user}}/expenses/' + $routeParams.id,
+				name    : 'expense',
+				unbound : true
+			});
+		}
 
 		$scope.findDaysOfMonth = function() {
 			return {
@@ -52,10 +66,21 @@ angular.module('Pockey.controllers', [])
 			};
 		};
 
-		$scope.save = function() {
+		$scope.create = function() {
 			RemoteService.addExpense($scope.expense);
-			$location.path('/menu');
+			$scope.back();
 		};
+
+		$scope.update = function() {
+			RemoteService.updateExpense($routeParams.id, $scope.expense);
+			$scope.back();
+		};
+
+		$scope.back = function() {
+			var previousPage = '/' + $routeParams.from;
+			delete $location.$$search.from;
+			$location.path(previousPage);
+		}
 	}])
 
 	.controller('OptionsController', ['$scope', '$window', 'RemoteService', 'AuthentificationService', function ($scope, $window, RemoteService, AuthentificationService) {
