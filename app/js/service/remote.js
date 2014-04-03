@@ -44,8 +44,11 @@ angular.module('Pockey.service.remote', ['firebase'])
 			updateExpense : function(id, expense) {
 				var self = this;
 				this.doOnce('/users/{{user}}/expenses/' + id, function(ref, old) {
-					self.removeExpense(id, old);
-					self.addExpense(expense);
+					self.doOnce('/users/{{user}}/sum', function(sum, value) {
+						sum.set((value - old.cost) + expense.cost);
+					});
+					self.getRef('/users/{{user}}/expenses/' + id).remove();
+					self.getNode('/users/{{user}}/expenses').$add(expense);
 				});
 			},
 
