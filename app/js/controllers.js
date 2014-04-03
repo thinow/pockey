@@ -72,7 +72,8 @@ angular.module('Pockey.controllers', [])
 		};
 
 		$scope.update = function() {
-			throw 'Not yet implemented';
+			RemoteService.updateExpense($routeParams.id, $scope.expense);
+			$scope.back();
 		};
 
 		$scope.back = function() {
