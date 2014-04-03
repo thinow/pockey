@@ -5,7 +5,9 @@ angular.module('Pockey.service.remote', ['firebase'])
 	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout) {
 		return {
 			inject : function(scope, data) {
-				data.name = this.findNodeName(data);
+				if (angular.isUndefined(data.name)) {
+					data.name = this.findNodeName(data);
+				}
 
 				var self = this;
 				AuthentificationService.register('login',  function() { self.bind(scope, data); });

@@ -49,7 +49,10 @@ angular.module('Pockey.controllers', [])
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 		RemoteService.inject($scope, { link : '/categories' });
 
-		$scope.editMode = angular.isDefined($routeParams.id);
+		// Edition mode only
+		if (angular.isDefined($routeParams.id)) {
+			RemoteService.inject($scope, { link : '/users/{{user}}/expenses/' + $routeParams.id, name : 'expense' });
+		}
 
 		$scope.findDaysOfMonth = function() {
 			return {
