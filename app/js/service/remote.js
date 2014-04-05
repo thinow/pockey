@@ -24,8 +24,8 @@ angular.module('Pockey.service.remote', ['firebase'])
 			bind : function(scope, data) {
 				var node = this.getNode(data.link);
 
-				if (angular.isDefined(data.default)) {
-					var newValue = angular.isDate(data.default) ? DateService.format(data.default) : data.default;
+				if (angular.isDefined(data.defaultValue)) {
+					var newValue = angular.isDate(data.defaultValue) ? DateService.format(data.defaultValue) : data.defaultValue;
 					this.intercept(node, function() { node.$set(newValue); });
 				}
 
