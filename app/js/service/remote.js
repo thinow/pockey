@@ -2,7 +2,7 @@
 
 angular.module('Pockey.service.remote', ['firebase'])
 
-	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout) {
+	.factory('RemoteService', ['REMOTE_SERVER', '$firebase', 'AuthentificationService', 'DateService', '$interpolate', '$timeout', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout) {
 		return {
 			inject : function(scope, data) {
 				if (angular.isUndefined(data.name)) {
@@ -101,5 +101,5 @@ angular.module('Pockey.service.remote', ['firebase'])
 				});
 			}
 		};
-	})
+	}])
 ;
