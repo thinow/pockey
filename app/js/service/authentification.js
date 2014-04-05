@@ -2,7 +2,7 @@
 
 angular.module('Pockey.service.authentification', ['firebase'])
 
-	.factory('AuthentificationService', function(REMOTE_SERVER, $firebaseAuth, $rootScope, $location) {
+	.factory('AuthentificationService', ['REMOTE_SERVER', '$firebaseAuth', '$rootScope', '$location', function(REMOTE_SERVER, $firebaseAuth, $rootScope, $location) {
 		return {
 			initialize : function(redirections) {
 				this.auth = $firebaseAuth(new Firebase(REMOTE_SERVER));
@@ -40,5 +40,5 @@ angular.module('Pockey.service.authentification', ['firebase'])
 				return $rootScope.user != null && angular.isDefined($rootScope.user);
 			}
 		};
-	})
+	}])
 ;

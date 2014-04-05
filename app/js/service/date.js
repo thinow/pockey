@@ -2,7 +2,7 @@
 
 angular.module('Pockey.service.date', [])
 
-	.factory('DateService', function($filter) {
+	.factory('DateService', ['$filter', function($filter) {
 		return {
 			createDate : function(string) {
 				return new Date(string);
@@ -33,5 +33,5 @@ angular.module('Pockey.service.date', [])
 				return date;
 			}
 		};
-	})
+	}])
 ;
