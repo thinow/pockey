@@ -7,13 +7,14 @@
 		<tr ng-show="expenses | isEmpty"><td>Liste vide</td></tr>
 		<tr ng-repeat="expense in expenses | asArray | orderBy:'date':true" ng-class-even="'even'" ng-click="selected = !selected">
 			<td ng-hide="selected">
-				<span title="{{expense.category.text}}" style="background-color: #{{expense.category.color}}">
+				<span style="background-color: #{{expense.category.color}}">
 					<i class="fa fa-{{expense.category.icon}}"></i>
 				</span>
 			</td>
+			<td ng-hide="selected" class="long">{{ expense.category.text }}</td>
 			<td ng-hide="selected" class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
 			<td ng-hide="selected">{{ -expense.cost | signedCurrency }}</td>
-			<td ng-hide="!selected" colspan="3">
+			<td ng-hide="!selected" colspan="4">
 				<a class="button primary" ng-href="{{'#/expenses/edit/' + expense.$id + '?from=expenses'}}"><i class="fa fa-wrench"></i> Modifier</a>
 				<a class="button primary" ng-click="remove(expense.$id, expense)"><i class="fa fa-trash-o"></i> Supprimer</a>
 			</td>
