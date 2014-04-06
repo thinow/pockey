@@ -2,8 +2,7 @@
 
 angular.module('Pockey.controllers', [])
 
-	.controller('HeaderController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
-		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
+	.controller('HeaderController', ['$scope', function ($scope) {
 	}])
 
 	.controller('HomeController', ['$rootScope', '$scope', 'AuthentificationService', function ($rootScope, $scope, AuthentificationService) {
