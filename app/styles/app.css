@@ -64,7 +64,7 @@ A:HOVER { cursor: pointer; }
 .list TR                 { background-color: #eafae3; }
 .list TR.even            { background-color: #e1f2da; }
 .list TR TD              { text-align: center; padding: 0.2em 1em; }
-.list TR TD:nth-child(3) { text-align: right; }
+.list TR TD:nth-child(4) { text-align: right; }
 .list .button            { font-size: 45%; vertical-align: middle; margin: 0 10%; }
 .list SPAN               { color: #fff; display: inline-block; width: 1.5em; border-radius: 0.3em; }
 @media screen and (max-width: 500px) {
