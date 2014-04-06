@@ -11,7 +11,7 @@
 					<i class="fa fa-{{expense.category.icon}}"></i>
 				</span>
 			</td>
-			<td ng-hide="selected">{{ expense.category.text }}</td>
+			<td ng-hide="selected" class="long">{{ expense.category.text }}</td>
 			<td ng-hide="selected" class="capitalized">{{ expense.date | date:'EEE dd' }}</td>
 			<td ng-hide="selected">{{ -expense.cost | signedCurrency }}</td>
 			<td ng-hide="!selected" colspan="4">

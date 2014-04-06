@@ -67,6 +67,9 @@ A:HOVER { cursor: pointer; }
 .list TR TD:nth-child(3) { text-align: right; }
 .list .button            { font-size: 45%; vertical-align: middle; margin: 0 10%; }
 .list SPAN               { color: #fff; display: inline-block; width: 1.5em; border-radius: 0.3em; }
+@media screen and (max-width: 500px) {
+	.list .long { display: none; }
+}
 
 .form DIV                 { height: 3em; margin: 0.2em 0; }
 .form DIV LABEL           { display: inline-block; text-align: right; width: 30%; }
