@@ -2,17 +2,20 @@
 
 angular.module('Pockey.controllers', [])
 
-	.controller('HeaderController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
-		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
+	.controller('HeaderController', ['$scope', function ($scope) {
 	}])
 
-	.controller('HomeController', ['$scope', 'AuthentificationService', function ($scope, AuthentificationService) {
+	.controller('HomeController', ['$rootScope', '$scope', 'AuthentificationService', function ($rootScope, $scope, AuthentificationService) {
+		$rootScope.title = '';
+
 		$scope.login = function(provider) {
 			AuthentificationService.login(provider);
 		};
 	}])
 
-	.controller('MenuController', ['$scope', '$window', '$location', 'RemoteService', 'DateService', function ($scope, $window, $location, RemoteService, DateService) {
+	.controller('MenuController', ['$rootScope', '$scope', '$window', '$location', 'RemoteService', 'DateService', function ($rootScope, $scope, $window, $location, RemoteService, DateService) {
+		$rootScope.title = 'Menu';
+
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget', default : 100 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum',    default : 0 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : DateService.findCurrentMonth() });
@@ -29,7 +32,9 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('ListController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
+	.controller('ListController', ['$rootScope', '$scope', 'RemoteService', function ($rootScope, $scope, RemoteService) {
+		$rootScope.title = 'Dépenses';
+
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/expenses' });
@@ -39,15 +44,19 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('SummaryController', ['$scope', 'RemoteService', function ($scope, RemoteService) {
+	.controller('SummaryController', ['$rootScope', '$scope', 'RemoteService', function ($rootScope, $scope, RemoteService) {
+		$rootScope.title = 'Budget';
+
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget' });
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 	}])
 
-	.controller('DetailController', ['$scope', '$location', '$routeParams', 'RemoteService', 'DateService', function ($scope, $location, $routeParams, RemoteService, DateService) {
+	.controller('DetailController', ['$rootScope', '$scope', '$location', '$routeParams', 'RemoteService', 'DateService', function ($rootScope, $scope, $location, $routeParams, RemoteService, DateService) {
+		$rootScope.title = '';
+
 		$scope.editMode = angular.isDefined($routeParams.id);
-		
+
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 		RemoteService.inject($scope, { link : '/categories' });
 
@@ -83,7 +92,9 @@ angular.module('Pockey.controllers', [])
 		}
 	}])
 
-	.controller('OptionsController', ['$scope', '$window', 'RemoteService', 'AuthentificationService', function ($scope, $window, RemoteService, AuthentificationService) {
+	.controller('OptionsController', ['$rootScope', '$scope', '$window', 'RemoteService', 'AuthentificationService', function ($rootScope, $scope, $window, RemoteService, AuthentificationService) {
+		$rootScope.title = 'Options';
+
 		$scope.logout = function() {
 			AuthentificationService.logout();
 		};
