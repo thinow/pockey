@@ -23,22 +23,22 @@ angular.module('Pockey.service.remote', ['firebase'])
 
 			bind : function(scope, data) {
 				var node = this.getNode(data.link);
-
-				if (angular.isDefined(data.defaultValue)) {
-					var newValue = angular.isDate(data.defaultValue) ? DateService.format(data.defaultValue) : data.defaultValue;
-					this.intercept(node, function() { node.$set(newValue); });
-				}
-
 				node.$bind(scope, data.name).then(function(unbind) {
 					if (data.unbound) unbind();
 				});
+
+				this.forceDefault(data);
 			},
 
-			intercept : function(node, callback) {
-				node.$on('loaded', function(value) {
-					// When value is empty, the node does not exist on server
-					if (value == '') $timeout(callback);
-				});
+			forceDefault : function(data) {
+				if (angular.isUndefined(data.defaultValue)) return;
+
+				var newValue = angular.isDate(data.defaultValue) ? DateService.format(data.defaultValue) : data.defaultValue;
+				this.doOnce(data.link, function(ref, value) {
+					console.log(data.link + ' >>> [' + value + '] and default = [' + newValue + ']');
+					// When value is null, the node does not exist on server
+					if (value === null) ref.set(newValue);
+				})
 			},
 
 			updateExpense : function(id, expense) {
