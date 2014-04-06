@@ -16,9 +16,10 @@ angular.module('Pockey.controllers', [])
 	.controller('MenuController', ['$rootScope', '$scope', '$window', '$location', 'RemoteService', 'DateService', function ($rootScope, $scope, $window, $location, RemoteService, DateService) {
 		$rootScope.title = 'Menu';
 
-		RemoteService.inject($scope, { link : '/users/{{user}}/budget', default : 100 });
-		RemoteService.inject($scope, { link : '/users/{{user}}/sum',    default : 0 });
-		RemoteService.inject($scope, { link : '/users/{{user}}/month',  default : DateService.findCurrentMonth() });
+		RemoteService.inject($scope, { link : '/users/{{user}}/budget', defaultValue : 100 });
+		RemoteService.inject($scope, { link : '/users/{{user}}/sum',    defaultValue : 0 });
+		RemoteService.inject($scope, { link : '/users/{{user}}/month',  defaultValue : DateService.findCurrentMonth() });
+
 
 		$scope.startNextMonth = function() {
 			if ($window.confirm('Passer au mois suivant ?')) {

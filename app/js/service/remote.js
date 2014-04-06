@@ -2,7 +2,7 @@
 
 angular.module('Pockey.service.remote', ['firebase'])
 
-	.factory('RemoteService', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout) {
+	.factory('RemoteService', ['REMOTE_SERVER', '$firebase', 'AuthentificationService', 'DateService', '$interpolate', '$timeout', function(REMOTE_SERVER, $firebase, AuthentificationService, DateService, $interpolate, $timeout) {
 		return {
 			inject : function(scope, data) {
 				if (angular.isUndefined(data.name)) {
@@ -24,8 +24,8 @@ angular.module('Pockey.service.remote', ['firebase'])
 			bind : function(scope, data) {
 				var node = this.getNode(data.link);
 
-				if (angular.isDefined(data.default)) {
-					var newValue = angular.isDate(data.default) ? DateService.format(data.default) : data.default;
+				if (angular.isDefined(data.defaultValue)) {
+					var newValue = angular.isDate(data.defaultValue) ? DateService.format(data.defaultValue) : data.defaultValue;
 					this.intercept(node, function() { node.$set(newValue); });
 				}
 
@@ -101,5 +101,5 @@ angular.module('Pockey.service.remote', ['firebase'])
 				});
 			}
 		};
-	})
+	}])
 ;

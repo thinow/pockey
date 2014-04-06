@@ -11,7 +11,7 @@ angular.module('Pockey', [
 
 	.constant('REMOTE_SERVER', 'https://pockey-dev.firebaseio.com')
 
-	.config(function($routeProvider) {
+	.config(['$routeProvider', function($routeProvider) {
 		$routeProvider
 			.when('/',                      { templateUrl : 'views/loading.html', controller : undefined })
 			.when('/home',                  { templateUrl : 'views/home.html',    controller : 'HomeController' })
@@ -22,12 +22,12 @@ angular.module('Pockey', [
 			.when('/expenses/edit/:id',     { templateUrl : 'views/detail.html',  controller : 'DetailController' })
 			.when('/options',               { templateUrl : 'views/options.html', controller : 'OptionsController' })
 			.otherwise({ redirectTo : '/' });
-	})
+	}])
 
-	.run(function(AuthentificationService) {
+	.run(['AuthentificationService', function(AuthentificationService) {
 		AuthentificationService.initialize([
 			{ onEvent : 'login',  redirectTo : '/menu' },
 			{ onEvent : 'logout', redirectTo : '/home' }
 		]);
-	})
+	}])
 ;

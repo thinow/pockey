@@ -80,6 +80,12 @@ sed -i "s/pockey-dev.firebaseio.com/$HOST.firebaseio.com/g" app/js/app.js
 
 
 
+echo "--- Compress JS/CSS"
+java -jar scripts/tools/yuicompressor-2.4.8.jar -o '.js$:.js'   `find app/ -name '*.js'  | xargs echo`
+java -jar scripts/tools/yuicompressor-2.4.8.jar -o '.css$:.css' `find app/ -name '*.css' | xargs echo`
+
+
+
 echo "--- Deploy on host"
 firebase deploy
 
