@@ -10,8 +10,7 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('HeaderController', ['$scope', function ($scope) {
-	}])
+	.controller('HeaderController', function() {})
 
 	.controller('HomeController', ['$scope', '$helper', 'AuthentificationService', function ($scope, $helper, AuthentificationService) {
 		$helper.defineTitle('');
