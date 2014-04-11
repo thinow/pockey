@@ -2,7 +2,7 @@
 
 angular.module('Pockey.controllers', [])
 
-	.factory('$do', ['$rootScope', '$window', function($rootScope, $window) {
+	.factory('$do', ['$rootScope', '$window', '$routeParams', function($rootScope, $window, $routeParams) {
 		return {
 			defineTitle : function(title) {
 				$rootScope.title = title;
@@ -12,6 +12,16 @@ angular.module('Pockey.controllers', [])
 				var confirm = $window.confirm(message);
 				if (confirm) return { onConfirm : function(callback) { callback(); } };
 				else         return { onConfirm : function() {} };
+			},
+
+			ifExistsInUrl : function(parameter) {
+				var value = this.getFromUrl(parameter);
+				if (angular.isDefined(value)) return { then : function(callback) { callback(value); } };
+				else                          return { then : function() {} };
+			},
+
+			getFromUrl : function(parameter) {
+				return $routeParams[parameter];
 			}
 		};
 	}])
@@ -66,21 +76,20 @@ angular.module('Pockey.controllers', [])
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 	}])
 
-	.controller('DetailController', ['$scope', '$do', '$location', '$routeParams', 'RemoteService', 'DateService', function ($scope, $do, $location, $routeParams, RemoteService, DateService) {
+	.controller('DetailController', ['$scope', '$do', '$location', 'RemoteService', 'DateService', function ($scope, $do, $location, RemoteService, DateService) {
 		$do.defineTitle('');
-
-		$scope.editMode = angular.isDefined($routeParams.id);
 
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
 		RemoteService.inject($scope, { link : '/categories' });
 
-		if ($scope.editMode) {
+		$do.ifExistsInUrl('id').then(function(id) {
+			$scope.editMode = true;
 			RemoteService.inject($scope, {
-				link    : '/users/{{user}}/expenses/' + $routeParams.id,
+				link    : '/users/{{user}}/expenses/' + id,
 				name    : 'expense',
 				unbound : true
 			});
-		}
+		});
 
 		$scope.findDaysOfMonth = function() {
 			return {
@@ -95,12 +104,12 @@ angular.module('Pockey.controllers', [])
 		};
 
 		$scope.update = function() {
-			RemoteService.updateExpense($routeParams.id, $scope.expense);
+			RemoteService.updateExpense($do.getFromUrl('id'), $scope.expense);
 			$scope.back();
 		};
 
 		$scope.back = function() {
-			var previousPage = '/' + $routeParams.from;
+			var previousPage = '/' + $do.getFromUrl('from');
 			delete $location.$$search.from;
 			$location.path(previousPage);
 		}
