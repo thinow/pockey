@@ -2,10 +2,16 @@
 
 angular.module('Pockey.controllers', [])
 
-	.factory('$do', ['$rootScope', function($rootScope) {
+	.factory('$do', ['$rootScope', '$window', function($rootScope, $window) {
 		return {
 			defineTitle : function(title) {
 				$rootScope.title = title;
+			},
+
+			ask : function(message) {
+				var confirm = $window.confirm(message);
+				if (confirm) return { onConfirm : function(callback) { callback(); } };
+				else         return { onConfirm : function() {} };
 			}
 		};
 	}])
@@ -20,7 +26,7 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('MenuController', ['$scope', '$do', '$window', '$location', 'RemoteService', 'DateService', function ($scope, $do, $window, $location, RemoteService, DateService) {
+	.controller('MenuController', ['$scope', '$do', '$location', 'RemoteService', 'DateService', function ($scope, $do, $location, RemoteService, DateService) {
 		$do.defineTitle('Menu');
 
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget', defaultValue : 100 });
@@ -29,10 +35,10 @@ angular.module('Pockey.controllers', [])
 
 
 		$scope.startNextMonth = function() {
-			if ($window.confirm('Passer au mois suivant ?')) {
+			$do.ask('Passer au mois suivant ?').onConfirm(function() {
 				var nextMonth = DateService.findNextMonth($scope.month);
 				RemoteService.changeRemoteMonth(nextMonth);
-			}
+			});
 		};
 
 		$scope.goTo = function(path) {
@@ -100,7 +106,7 @@ angular.module('Pockey.controllers', [])
 		}
 	}])
 
-	.controller('OptionsController', ['$scope', '$do', '$window', 'RemoteService', 'AuthentificationService', function ($scope, $do, $window, RemoteService, AuthentificationService) {
+	.controller('OptionsController', ['$scope', '$do', 'RemoteService', 'AuthentificationService', function ($scope, $do, RemoteService, AuthentificationService) {
 		$do.defineTitle('Options');
 
 		$scope.logout = function() {
@@ -108,9 +114,9 @@ angular.module('Pockey.controllers', [])
 		};
 
 		$scope.erase = function() {
-			if ($window.confirm('Supprimer votre compte ?')) {
+			$do.ask('Supprimer votre compte ?').onConfirm(function() {
 				RemoteService.eraseUser();
-			}
+			});
 		};
 	}])
 ;
