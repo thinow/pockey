@@ -2,7 +2,7 @@
 
 angular.module('Pockey.controllers', [])
 
-	.factory('$do', ['$rootScope', '$window', '$routeParams', function($rootScope, $window, $routeParams) {
+	.factory('$do', ['$rootScope', '$window', '$location', '$routeParams', function($rootScope, $window, $location, $routeParams) {
 		return {
 			defineTitle : function(title) {
 				$rootScope.title = title;
@@ -22,6 +22,13 @@ angular.module('Pockey.controllers', [])
 
 			getFromUrl : function(parameter) {
 				return $routeParams[parameter];
+			},
+
+			redirect : function(path, parameters) {
+				angular.forEach(parameters, function(value, key) {
+					$location.search(key, value);
+				})
+				$location.path(path);
 			}
 		};
 	}])
@@ -36,13 +43,12 @@ angular.module('Pockey.controllers', [])
 		};
 	}])
 
-	.controller('MenuController', ['$scope', '$do', '$location', 'RemoteService', 'DateService', function ($scope, $do, $location, RemoteService, DateService) {
+	.controller('MenuController', ['$scope', '$do', 'RemoteService', 'DateService', function ($scope, $do, RemoteService, DateService) {
 		$do.defineTitle('Menu');
 
 		RemoteService.inject($scope, { link : '/users/{{user}}/budget', defaultValue : 100 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum',    defaultValue : 0 });
 		RemoteService.inject($scope, { link : '/users/{{user}}/month',  defaultValue : DateService.findCurrentMonth() });
-
 
 		$scope.startNextMonth = function() {
 			$do.ask('Passer au mois suivant ?').onConfirm(function() {
@@ -51,9 +57,7 @@ angular.module('Pockey.controllers', [])
 			});
 		};
 
-		$scope.goTo = function(path) {
-			return $location.path(path);
-		};
+		$scope.goTo = $do.redirect;
 	}])
 
 	.controller('ListController', ['$scope', '$do', 'RemoteService', function ($scope, $do, RemoteService) {
@@ -111,7 +115,7 @@ angular.module('Pockey.controllers', [])
 		$scope.back = function() {
 			var previousPage = '/' + $do.getFromUrl('from');
 			delete $location.$$search.from;
-			$location.path(previousPage);
+			$do.redirect(previousPage);
 		}
 	}])
 
