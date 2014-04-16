@@ -20,8 +20,12 @@ angular.module('Pockey.controllers', [])
 				else                          return { then : function() {} };
 			},
 
-			getFromUrl : function(parameter) {
-				return $routeParams[parameter];
+			getFromUrl : function(parameter, options) {
+				var value = $routeParams[parameter];
+				if (angular.isDefined(options) && options.remove) {
+					delete $location.$$search[parameter];
+				}
+				return value;
 			},
 
 			redirect : function(path, parameters) {
@@ -80,7 +84,7 @@ angular.module('Pockey.controllers', [])
 		RemoteService.inject($scope, { link : '/users/{{user}}/sum' });
 	}])
 
-	.controller('DetailController', ['$scope', '$do', '$location', 'RemoteService', 'DateService', function ($scope, $do, $location, RemoteService, DateService) {
+	.controller('DetailController', ['$scope', '$do', 'RemoteService', 'DateService', function ($scope, $do, RemoteService, DateService) {
 		$do.defineTitle('');
 
 		RemoteService.inject($scope, { link : '/users/{{user}}/month' });
@@ -113,9 +117,8 @@ angular.module('Pockey.controllers', [])
 		};
 
 		$scope.back = function() {
-			var previousPage = '/' + $do.getFromUrl('from');
-			delete $location.$$search.from;
-			$do.redirect(previousPage);
+			var previousPage = $do.getFromUrl('from', { remove : true });
+			$do.redirect('/' + previousPage);
 		}
 	}])
 
